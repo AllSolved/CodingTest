@@ -278,5 +278,39 @@ void Camping()
     }
 }
 
+void ATM()
+{
+    // Input
+    int N = 0;
+    std::cin >> N;
+
+    std::vector<int> P;
+    P.reserve(N);
+
+    for (int i = 0; i < N; ++i)
+    {
+        int time = 0;
+        std::cin >> time;
+        P.push_back(time);
+    }
+
+    // 배열을 오름차순으로 정렬
+    std::sort(P.begin(), P.end());
+
+    int result = 0;
+    int finalResult = 0;
+
+    for (int i = 0; i < N; ++i)
+    {
+        int currentTime = P[i] + result;
+        result = currentTime;
+
+        finalResult += result;
+    }
+
+    // Output
+    std::cout << finalResult;
+}
+
 
 

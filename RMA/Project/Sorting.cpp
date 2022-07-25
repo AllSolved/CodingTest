@@ -43,3 +43,55 @@ void SelectionSort()
 		std::cout  << arr[i] << " " ;
 	}
 }
+
+void InsertionSort()
+{
+	int arr[10] = { 7,5,9,0,3,1,6,2,4,8 };
+
+	int arrSize = 10;				// 배열의 총 사이즈
+	int minIndex = 0;				// 가장 작은 값을 가지고 있는 인덱스
+
+	std::cout << "정렬 전 : ";
+
+	for (int i = 0; i < arrSize; ++i)
+	{
+		std::cout << arr[i] << " ";
+	}
+
+	std::cout << '\n';
+
+	// 삽입 정렬은 두번째 인덱스 부터 시작함 (첫번째 데이터는 그 자체로 정렬되어 있다고 판단하기 때문) 
+	for (int currentIndex = 1; currentIndex < arrSize; ++currentIndex)
+	{
+		// 현재 인덱스의 값
+		int currentValue = arr[currentIndex];
+
+		// 자신보다 작은 인덱스를 순회하며 현재 데이터의 자리를 찾는다.
+		for (int compareIndex = currentIndex-1 ; compareIndex >= 0; --compareIndex)
+		{
+			int compareValue = arr[compareIndex];
+
+			// currentValue가 비교할 값보다 더 작다면 위치를 옮긴다
+			if (currentValue < compareValue)
+			{
+				arr[compareIndex + 1] = compareValue;
+				arr[compareIndex] = currentValue;
+			}
+			
+			// currentValue가 더 크다면 그대로 멈춘다.
+			else
+			{
+				break;
+			}
+
+		}
+	}
+
+	std::cout << "정렬 후 : ";
+
+
+	for (int i = 0; i < arrSize; ++i)
+	{
+		std::cout << arr[i] << " ";
+	}
+}
