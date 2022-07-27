@@ -95,3 +95,118 @@ void InsertionSort()
 		std::cout << arr[i] << " ";
 	}
 }
+
+void QuickSort()
+{
+	int arr[10] = { 5,7,9,0,3,1,6,2,4,8 };
+
+	int arrSize = 10;				// 배열의 총 사이즈
+
+	std::cout << "정렬 전 : ";
+
+	for (int i = 0; i < arrSize; ++i)
+	{
+		std::cout << arr[i] << " ";
+	}
+	std::cout << '\n';
+
+	// 피봇을 지정
+	int pivotValue = arr[0];
+	int leftIndex = 1;
+	int rightIndex = arrSize - 1;
+	
+	// 왼쪽에부터 피봇보다 큰 데이터를 고르고, 오른쪽에서부터 피봇보다 작은 데이터를 선택한다.
+
+	while (leftIndex <= rightIndex)
+	{
+		while (leftIndex < arrSize && (arr[leftIndex] <= pivotValue))
+		{
+			++leftIndex;
+		}
+
+		while (rightIndex > 0 && (arr[rightIndex] >= pivotValue))
+		{
+			--rightIndex;
+
+		}
+
+		int leftValue = arr[leftIndex];
+		int rightValue = arr[rightIndex];
+
+		// 인덱스가 엇갈렸을 경우 작은쪽의 데이터를 pivot으로 바꿔준다
+		if (leftIndex > rightIndex)
+		{
+			arr[0] = rightValue;
+			arr[rightIndex] = pivotValue;
+		}
+
+		else
+		{
+			arr[leftIndex] = rightValue;
+			arr[rightIndex] = leftValue;
+		}
+	}
+
+	std::cout << "분할 정렬 : ";
+
+	for (int i = 0; i < arrSize; ++i)
+	{
+		std::cout << arr[i] << " ";
+	}
+
+	std::cout << '\n';
+
+	// 위의 정렬 과정을 좌, 우로 나눠서 반복한다.
+}
+
+void QuickSort(int* arrData, int startIndex, int endIndex)
+{
+	if (startIndex >= endIndex)
+	{
+		return;
+	}
+
+
+	// 피봇을 지정
+	int pivotValue = arrData[startIndex];
+	int leftIndex = startIndex+1;
+	int rightIndex = endIndex;
+	
+	// 왼쪽에부터 피봇보다 큰 데이터를 고르고, 오른쪽에서부터 피봇보다 작은 데이터를 선택한다.
+
+	while (leftIndex <= rightIndex)
+	{
+		while (leftIndex <= endIndex && (arrData[leftIndex] <= pivotValue))
+		{
+			++leftIndex;
+		}
+
+		while (rightIndex > startIndex && (arrData[rightIndex] >= pivotValue))
+		{
+			--rightIndex;
+
+		}
+
+		int leftValue = arrData[leftIndex];
+		int rightValue = arrData[rightIndex];
+
+		// 인덱스가 엇갈렸을 경우 작은쪽의 데이터를 pivot으로 바꿔준다
+		if (leftIndex > rightIndex)
+		{
+			arrData[startIndex] = rightValue;
+			arrData[rightIndex] = pivotValue;
+		}
+
+		else
+		{
+			arrData[leftIndex] = rightValue;
+			arrData[rightIndex] = leftValue;
+		}
+	}
+
+	// 위의 정렬 과정을 좌, 우로 나눠서 반복한다.
+
+	QuickSort(arrData, startIndex, rightIndex -1);
+	QuickSort(arrData, leftIndex+1, endIndex);
+
+}
