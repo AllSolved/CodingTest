@@ -7,5 +7,6 @@ void SelectionSort();
 void InsertionSort();
 
 // Äü Á¤·Ä
-void QuickSort();
 void QuickSort(int* arrData, int startIndex, int endIndex);
+
+void CountSort(int* arrData, int arrSize, int minValue, int maxValue);
