@@ -20,3 +20,5 @@ void Camping();
 
 //22.7.22 น้มุ 11399น๘ ATM
 void ATM();
+
+std::string MakeBigNumber(std::string number, int k);

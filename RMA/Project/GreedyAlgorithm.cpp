@@ -1,7 +1,9 @@
 #include "GreedyAlgorithm.h"
 #include <algorithm>
+#incl
 #include <vector>
 
+using namespace std;
 //21. 8.8 ¿¹Á¦ 1
 void Change()
 {
@@ -310,6 +312,28 @@ void ATM()
 
     // Output
     std::cout << finalResult;
+}
+
+std::string MakeBigNumber(std::string number, int k)
+{
+    string answer = "";
+
+    int index = -1;
+    for (int i = 0; i < number.size() - k; ++i)
+    {
+        char maxValue = ' ';
+        for (int j = index + 1; j <= k + i; j++)
+        {
+            if (maxValue < number[j])
+            {
+                maxValue = number[j];
+                index = j;
+            }
+        }
+        answer += maxValue;
+    }
+
+    return answer;
 }
 
 

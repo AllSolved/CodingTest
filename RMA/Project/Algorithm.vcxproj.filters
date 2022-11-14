@@ -59,5 +59,8 @@
     <ClInclude Include="Sorting.h">
       <Filter>Algorithm\05. Sorting</Filter>
     </ClInclude>
+    <ClInclude Include="STLHeader.h">
+      <Filter>main</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
