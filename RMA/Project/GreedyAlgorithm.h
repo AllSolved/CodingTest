@@ -21,4 +21,7 @@ void Camping();
 //22.7.22 백준 11399번 ATM
 void ATM();
 
+// 프로그래머스 큰 수 만들기
 std::string MakeBigNumber(std::string number, int k);
+
+int JoyStick(std::string name);

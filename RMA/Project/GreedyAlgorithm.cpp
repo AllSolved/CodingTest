@@ -1,6 +1,5 @@
 #include "GreedyAlgorithm.h"
 #include <algorithm>
-#incl
 #include <vector>
 
 using namespace std;
@@ -333,6 +332,42 @@ std::string MakeBigNumber(std::string number, int k)
         answer += maxValue;
     }
 
+    return answer;
+}
+
+int JoyStick(std::string name)
+{
+    int answer = 0;
+    int n = name.length();
+
+    // 조이스틱을 한 방향으로만 움직였을 때
+    int moveOneDirection = n - 1;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (name[i] - 'A' < 14)
+        {
+            answer += name[i] - 'A';
+        }
+
+        else
+        {
+            answer += 'Z' - name[i] + 1;
+        }
+
+
+        int index = i + 1;
+
+        while (index < n &&
+            name[index] == 'A')
+        {
+            ++index;
+        }
+
+        moveOneDirection = min(moveOneDirection, (i + n - index) + min(i, n - index));
+    }
+
+    answer += moveOneDirection;
     return answer;
 }
 
