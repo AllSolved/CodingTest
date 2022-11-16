@@ -1,9 +1,11 @@
 #include <crtdbg.h>
+#include "STLHeader.h"
 #include "GreedyAlgorithm.h"
 #include "Implementation.h"
 #include "DFS.h"
 #include "BFS.h"
 #include "Sorting.h"
+#include "CodingTest.h"
 
 
 
@@ -11,18 +13,14 @@ int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	int arr[] = { 7,5,9,0,3,1,6,2,9,1,4,8,0,5,2 };
+	vector<vector<double>> objectBallPosList;
 
-	std::cout << "Á¤·Ä Àü : ";
+	vector<double> ballPos = { 5.0f,0.0f };
+	objectBallPosList.push_back(ballPos);
+	ballPos = { 0.0f,3.0f };
+	objectBallPosList.push_back(ballPos);
+	ballPos = { 1.0f,1.0f };
 
-	for (int i = 0; i < 15; ++i)
-	{
-		std::cout << arr[i] << " ";
-	}
-	std::cout << '\n';
-
-	CountSort(arr,15, 0, 9);
-
-	std::cout << '\n';
+	CircleDetect (objectBallPosList, ballPos);
 
 }

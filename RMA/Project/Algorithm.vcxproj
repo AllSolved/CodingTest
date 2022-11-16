@@ -150,6 +150,7 @@
     <ClCompile Include="Implementation.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Sorting.cpp" />
+    <ClCompile Include="CodingTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BFS.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Implementation.h" />
     <ClInclude Include="Sorting.h" />
     <ClInclude Include="STLHeader.h" />
+    <ClInclude Include="CodingTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

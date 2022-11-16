@@ -22,6 +22,24 @@
     <Filter Include="Algorithm\05. Sorting">
       <UniqueIdentifier>{db2d0d01-3efd-42f6-abe2-c2f57bdf3719}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Algorithm\06. Search">
+      <UniqueIdentifier>{847d59c1-b1ea-4cf0-91c0-12441b3ae87b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithm\07. Graph">
+      <UniqueIdentifier>{32cb8c0a-f4bb-4a77-b697-94848aed9d6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithm\08. DP">
+      <UniqueIdentifier>{0b0f2081-cf35-4775-aa6f-ae195cf93924}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithm\09. Math">
+      <UniqueIdentifier>{0480c25f-5fe8-44d3-a744-b360b4fc2d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithm\10.ETC.">
+      <UniqueIdentifier>{0e97f4f4-2db6-42d3-ad46-7a0b91a4b3e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithm\CodingTest">
+      <UniqueIdentifier>{ca3d5e3f-4c75-4ad5-b81b-8b764720125b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,6 +60,7 @@
     <ClCompile Include="Sorting.cpp">
       <Filter>Algorithm\05. Sorting</Filter>
     </ClCompile>
+    <ClCompile Include="CodingTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GreedyAlgorithm.h">
@@ -62,5 +81,6 @@
     <ClInclude Include="STLHeader.h">
       <Filter>main</Filter>
     </ClInclude>
+    <ClInclude Include="CodingTest.h" />
   </ItemGroup>
 </Project>

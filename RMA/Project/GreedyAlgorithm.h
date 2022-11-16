@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
-
+#include "STLHeader.h"
+using namespace std;
 //21. 8.8 예제 1
 void Change();
 
@@ -24,4 +25,8 @@ void ATM();
 // 프로그래머스 큰 수 만들기
 std::string MakeBigNumber(std::string number, int k);
 
+// 프로그래머스 조이스틱
 int JoyStick(std::string name);
+
+// 프로그래머스 체육복
+int SweatSuit(int n, vector<int> lost, vector<int> reserve);
