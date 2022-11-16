@@ -371,6 +371,68 @@ int JoyStick(std::string name)
     return answer;
 }
 
+int SweatSuit(int n, vector<int> lost, vector<int> reserve)
+{
+    int answer = n;
+
+    // 확실하게 빌려줄 수 있는 사람만 table에 등록.
+
+    sort(lost.begin(), lost.end());
+    sort(reserve.begin(), reserve.end());
+
+    unordered_map<int, bool> reserveTable;
+
+    for (int i = 0; i < reserve.size(); ++i)
+    {
+        reserveTable[reserve[i]] = true;
+    }
+
+    for (int i = 0; i < lost.size(); ++i)
+    {
+        auto iter = reserveTable.find(lost[i]);
+
+        // 여유분을 도난 맞은 상황이라면
+        if (iter != reserveTable.end())
+        {
+            reserveTable.erase(iter->first);
+            lost[i] = -1;
+        }
+    }
+
+
+    for (int i = 0; i < lost.size(); ++i)
+    {
+        // 잃어버렸지만 여분이 있어서 안빌려도 되는 애
+        if (lost[i] == -1)
+        {
+            continue;
+        }
+
+        // 왼쪽을 찾아본 뒤 
+        auto iter = reserveTable.find(lost[i] - 1);
+
+        // 못빌렸다면 오른쪽을 확인
+        if (iter == reserveTable.end())
+        {
+            iter = reserveTable.find(lost[i] + 1);
+        }
+
+        // 결국 못빌린 애
+        if (iter == reserveTable.end())
+        {
+            --answer;
+        }
+
+        // 빌렸다면 빌려줄 수 있는 Table에서 삭제해즌다
+        else
+        {
+            reserveTable.erase(iter->first);
+        }
+    }
+
+    return answer;
+}
+
 
 
 
