@@ -1,10 +1,5 @@
 #include "BFS.h"
-#include <algorithm>
-#include <vector>
-#include <iostream>
-#include <map>
-#include <list>
-#include <queue>
+using namespace std;
 
 void BFS()
 {
@@ -254,4 +249,77 @@ void JumpJump()
 	}
 
 	std::cout << Result << std::endl;
+}
+
+struct Pos
+{
+	int x;
+	int y;
+};
+
+int ShortestDistanceInGameMap(vector<vector<int>> maps)
+{
+	int answer = -1;
+
+	int mapX = (int)maps[0].size();
+	int mapY = (int)maps.size();
+
+	int dirX[] = { 1,-1,0,0 };
+	int dirY[] = { 0,0,1,-1 };
+	int visit[101][101] = { false };
+	int bfsMap[101][101] = { 0 };
+
+	// 갈 수 없는 곳은 이미 방문한 처리를 한다.
+	for (int y = 0; y < mapY; ++y)
+	{
+		for (int x = 0; x < mapX; ++x)
+		{
+			visit[y][x] = maps[y][x] == 0 ? true : false;
+		}
+	}
+
+	queue<Pos> q;
+	Pos startPos;
+	startPos.x = 0;
+	startPos.y = 0;
+
+	q.push(startPos);
+	visit[0][0] = true;
+	bfsMap[0][0] = 1;
+
+	while (!q.empty())
+	{
+		Pos currentPos = q.front();
+		q.pop();
+
+		for (int i = 0; i < 4; ++i)
+		{
+			Pos nextPos;
+			nextPos.x = currentPos.x + dirX[i];
+			nextPos.y = currentPos.y + dirY[i];
+
+			// 방문할 수 없는 곳의 경우
+			if (nextPos.x < 0 || nextPos.y < 0 ||
+				nextPos.x >= mapX || nextPos.y >= mapY)
+			{
+				continue;
+			}
+
+			if (visit[nextPos.y][nextPos.x])
+			{
+				continue;
+			}
+
+			visit[nextPos.y][nextPos.x] = true;
+			q.push(nextPos);
+			bfsMap[nextPos.y][nextPos.x] = bfsMap[currentPos.y][currentPos.x] + 1;
+		}
+	}
+
+	if (visit[mapY - 1][mapX - 1])
+	{
+		answer = bfsMap[mapY - 1][mapX - 1];
+	}
+
+	return answer;
 }
