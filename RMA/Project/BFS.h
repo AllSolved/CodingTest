@@ -13,3 +13,7 @@ void JumpJump();
 
 // 22.12.14 프로그래머스 게임 맵 최단거리;
 int ShortestDistanceInGameMap(vector<vector<int> > maps);
+
+// 22.12.17 프로그래머스 단어 변환
+bool CanChange(string src, string dest);
+int ChangeWords(string begin, string target, vector<string> words);

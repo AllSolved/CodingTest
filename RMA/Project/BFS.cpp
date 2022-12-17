@@ -323,3 +323,55 @@ int ShortestDistanceInGameMap(vector<vector<int>> maps)
 
 	return answer;
 }
+
+bool CanChange(string src, string dest)
+{
+	bool result = false;
+	int count = 0;
+
+	for (int i = 0; i < dest.length(); ++i)
+	{
+		if (src[i] != dest[i])
+		{
+			++count;
+		}
+	}
+
+	result = count == 1 ? true : false;
+	return result;
+}
+
+int ChangeWords(string begin, string target, vector<string> words)
+{
+	int answer = 0;
+	queue<string> q;
+	q.push(begin);
+
+
+	while (!q.empty())
+	{
+		string currentWord = q.front();
+		q.pop();
+
+		for (int i = 0; i < words.size(); ++i)
+		{
+			string changeWord = words[i];
+
+			if (CanChange(currentWord, changeWord))
+			{
+				if (changeWord == target)
+				{
+					return answer + 1;
+				}
+
+				else
+				{
+					q.push(words[i]);
+					++answer;
+				}
+			}
+		}
+	}
+
+	return answer;
+}
