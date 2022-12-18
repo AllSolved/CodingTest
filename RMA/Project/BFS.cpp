@@ -343,35 +343,36 @@ bool CanChange(string src, string dest)
 
 int ChangeWords(string begin, string target, vector<string> words)
 {
-	int answer = 0;
-	queue<string> q;
-	q.push(begin);
+	queue<pair<string, int>> q;
+	pair<string, int> p(begin, 0);
 
+	q.push(p);
+	bool visit[51] = { false };
 
 	while (!q.empty())
 	{
-		string currentWord = q.front();
+		pair<string, int> currentWord = q.front();
 		q.pop();
 
 		for (int i = 0; i < words.size(); ++i)
 		{
-			string changeWord = words[i];
-
-			if (CanChange(currentWord, changeWord))
+			if (visit[i] == true)
 			{
-				if (changeWord == target)
+				continue;
+			}
+
+			if (CanChange(currentWord.first, words[i]))
+			{
+				if (words[i] == target)
 				{
-					return answer + 1;
+					return currentWord.second + 1;
 				}
 
-				else
-				{
-					q.push(words[i]);
-					++answer;
-				}
+				visit[i] = true;
+				q.push(pair<string, int>(words[i], currentWord.second + 1));
 			}
 		}
 	}
 
-	return answer;
+	return 0;
 }
