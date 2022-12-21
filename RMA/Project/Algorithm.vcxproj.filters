@@ -34,11 +34,11 @@
     <Filter Include="Algorithm\09. Math">
       <UniqueIdentifier>{0480c25f-5fe8-44d3-a744-b360b4fc2d9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Algorithm\10.ETC.">
-      <UniqueIdentifier>{0e97f4f4-2db6-42d3-ad46-7a0b91a4b3e5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Algorithm\CodingTest">
       <UniqueIdentifier>{ca3d5e3f-4c75-4ad5-b81b-8b764720125b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithm\10.etc.">
+      <UniqueIdentifier>{0e97f4f4-2db6-42d3-ad46-7a0b91a4b3e5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +61,7 @@
       <Filter>Algorithm\05. Sorting</Filter>
     </ClCompile>
     <ClCompile Include="CodingTest.cpp" />
+    <ClCompile Include="etc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GreedyAlgorithm.h">
@@ -82,5 +83,6 @@
       <Filter>main</Filter>
     </ClInclude>
     <ClInclude Include="CodingTest.h" />
+    <ClInclude Include="etc.h" />
   </ItemGroup>
 </Project>

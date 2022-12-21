@@ -433,6 +433,32 @@ int SweatSuit(int n, vector<int> lost, vector<int> reserve)
     return answer;
 }
 
+bool Compare(vector<int>& a, vector<int>& b)
+{
+    return a[1] < b[1];
+}
+
+int SpeedCamera(vector<vector<int>> routes)
+{
+    // 오름차순 정렬이 핵심인 문제
+    int answer = 0;
+    int camera = -300001;
+
+    sort(routes.begin(), routes.end(), Compare);
+
+    for (int i = 0; i < routes.size(); ++i)
+    {
+        if (routes[i][0] > camera)
+        {
+            ++answer;
+            camera = routes[i][1];
+        }
+    }
+
+
+    return answer;
+}
+
 
 
 

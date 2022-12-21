@@ -30,3 +30,7 @@ int JoyStick(std::string name);
 
 // 프로그래머스 체육복
 int SweatSuit(int n, vector<int> lost, vector<int> reserve);
+
+// 22.12.21 프로그래머스 단속 카메라
+bool Compare(vector<int>& a, vector<int>& b);
+int SpeedCamera(vector<vector<int>> routes);
