@@ -460,6 +460,55 @@ int SpeedCamera(vector<vector<int>> routes)
 }
 
 
+int island[101] = { 0 };
+bool Comp(vector<int>& v1, vector<int>& v2)
+{
+    return v1[2] < v2[2];
+}
+
+int FindParent(int index)
+{
+    if (island[index] == index) { return index; }
+    return island[index] = FindParent(island[index]);
+}
+
+int LinkIsland(int n, vector<vector<int>> costs)
+{
+    int answer = 0;
+    int bridge = 0;
+
+    for (int i = 0; i < n; ++i)
+    {
+        island[i] = i;
+    }
+
+    // 오름차순 정렬
+    sort(costs.begin(), costs.end(), Comp);
+
+    for (int i = 0; i < costs.size(); ++i)
+    {
+        int startParent = FindParent(costs[i][0]);
+        int endParent = FindParent(costs[i][1]);
+        int cost = costs[i][2];
+
+        // 부모가 다르면 건설
+        if (startParent != endParent)
+        {
+            island[endParent] = startParent;
+            answer += cost;
+            ++bridge;
+        }
+
+        if (bridge == n - 1)
+        {
+            break;
+        }
+    }
+
+    return answer;
+}
+
+
 
 
 

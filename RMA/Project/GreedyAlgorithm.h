@@ -34,3 +34,8 @@ int SweatSuit(int n, vector<int> lost, vector<int> reserve);
 // 22.12.21 프로그래머스 단속 카메라
 bool Compare(vector<int>& a, vector<int>& b);
 int SpeedCamera(vector<vector<int>> routes);
+
+// 22.12.22 프로그래머스 섬 연결하기
+bool Comp(vector<int>& a, vector<int>& b);
+int FindParent(int index);
+int LinkIsland(int n,vector<vector<int>> costs);
