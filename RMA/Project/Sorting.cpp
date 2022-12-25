@@ -183,6 +183,7 @@ void CountSort(int* arrData, int arrSize, int minValue, int maxValue)
 	delete[] arrSort;
 }
 
+
 void CountSort()
 {
 	int arr[] = { 7,5,9,0,3,1,6,2,9,1,4, 8,0,5,2 };
@@ -198,4 +199,22 @@ void CountSort()
 	}
 
 	std::cout << '\n';
+}
+
+
+int HIndex(vector<int> citations)
+{
+	int answer = 0;
+
+	sort(citations.begin(), citations.end(), greater<int>());
+
+	for (int i = 0; i < citations.size(); ++i)
+	{
+		if (citations[i] > i)
+			++answer;
+		else
+			break;
+	}
+
+	return answer;
 }
