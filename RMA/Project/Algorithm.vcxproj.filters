@@ -62,6 +62,7 @@
     </ClCompile>
     <ClCompile Include="CodingTest.cpp" />
     <ClCompile Include="etc.cpp" />
+    <ClCompile Include="Search.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GreedyAlgorithm.h">
@@ -84,5 +85,6 @@
     </ClInclude>
     <ClInclude Include="CodingTest.h" />
     <ClInclude Include="etc.h" />
+    <ClInclude Include="Search.h" />
   </ItemGroup>
 </Project>

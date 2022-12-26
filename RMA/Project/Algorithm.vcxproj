@@ -150,6 +150,7 @@
     <ClCompile Include="GreedyAlgorithm.cpp" />
     <ClCompile Include="Implementation.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Search.cpp" />
     <ClCompile Include="Sorting.cpp" />
     <ClCompile Include="CodingTest.cpp" />
   </ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="etc.h" />
     <ClInclude Include="GreedyAlgorithm.h" />
     <ClInclude Include="Implementation.h" />
+    <ClInclude Include="Search.h" />
     <ClInclude Include="Sorting.h" />
     <ClInclude Include="STLHeader.h" />
     <ClInclude Include="CodingTest.h" />
