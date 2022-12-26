@@ -15,7 +15,7 @@ int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	std::vector<int> data = {0,2,4,6,8,10,12,14,16,18};
+	std::vector<string> data = { "55-50+40" };
 	
-	BinarySearch(data,4);
+	MissingParentheses();
 }

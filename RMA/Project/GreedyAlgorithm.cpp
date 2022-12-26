@@ -508,6 +508,52 @@ int LinkIsland(int n, vector<vector<int>> costs)
     return answer;
 }
 
+void MissingParentheses()
+{
+    int answer = 0;
+    string expression;
+    cin >> expression;
+
+    string number;
+    int currentNumber;
+    bool isMinus = false;
+
+    // 부호와 숫자를 분리해서 저장
+    for (int i = 0; i <= expression.size(); ++i)
+    {
+        // 부호 일 경우
+        if (expression[i] == '-' || expression[i] == '+' ||
+            i == expression.size())
+        {
+            currentNumber = stoi(number);
+            number.clear();
+
+            // 마지막 부호에 따라 계산을 달리함
+            if (isMinus)
+            {
+                answer -= currentNumber;
+            }
+
+            else
+            {
+                answer += currentNumber;
+            }
+
+
+            isMinus = expression[i] == '-' ? true : isMinus;
+        }
+
+        // 숫자일 경우
+        else
+        {
+            number += expression[i];
+        }
+
+    }
+
+    cout << answer;
+}
+
 
 
 

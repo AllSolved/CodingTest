@@ -39,3 +39,6 @@ int SpeedCamera(vector<vector<int>> routes);
 bool Comp(vector<int>& a, vector<int>& b);
 int FindParent(int index);
 int LinkIsland(int n,vector<vector<int>> costs);
+
+// 22.12.26 น้มุ 1541น๘ ภาพ๎น๖ธฐ ฐýศฃ
+void MissingParentheses();
