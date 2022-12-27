@@ -26,7 +26,7 @@ struct Pos
 
 // 배열은 선언만 값형으로 할 뿐, 참조형으로 전달된다.
 void Virus(int mapCopy[][8]);
+void MakeWall(int count);
 
 void Virus();
-void MakeWall(int count);
 void Laboratory();

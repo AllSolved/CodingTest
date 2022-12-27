@@ -376,23 +376,25 @@ int Y, X;
 int dirX[] = { 0,0,1,-1 };
 int dirY[] = { -1,1,0,0 };
 
-int LaboratoryMap[8][8] = { 0 };
+int virusCount, wallCount = 0;
+int LaboratoryMap[9][9] = { 0 };
+bool visit[9][9] = { false };
 
 int answer = 0;
-int tempMap[8][8] = { 0 };
+int tempMap[9][9] = { 0 };
 
 
 void Virus()
 {
 	queue<Pos> qVirus;
-	int mapCopy[8][8] = {0};
-	copy(&tempMap[0][0], &tempMap[0][0] + (Y * X), &mapCopy[0][0]);
 
 	for (int y = 0; y < Y; ++y)
 	{
 		for (int x = 0; x < X; ++x)
 		{
-			if (mapCopy[y][x] == 2)
+			visit[y][x] = false;
+
+			if (LaboratoryMap[y][x] == 2)
 			{
 				Pos virusPos;
 				virusPos.x = x;
@@ -402,6 +404,8 @@ void Virus()
 			}
 		}
 	}
+
+	int virus = virusCount;
 
 	while (!qVirus.empty())
 	{
@@ -416,29 +420,20 @@ void Virus()
 			nextPos.y = pos.y + dirY[i];
 
 			// 범위를 벗어날 경우
-			if ((nextPos.x >= 0 && nextPos.y >= 0 &&
-				nextPos.x < X && nextPos.y < Y) && 
-				mapCopy[nextPos.y][nextPos.x] == 0)
+			if ((nextPos.x < 0 || nextPos.y < 0 ||
+				nextPos.x >= X || nextPos.y >= Y))
+				continue;
+
+			if(!visit[nextPos.y][nextPos.x] && LaboratoryMap[nextPos.y][nextPos.x] == 0)
 			{
-				mapCopy[nextPos.y][nextPos.x] = 2;
 				qVirus.push(nextPos);
+				visit[nextPos.y][nextPos.x] = true;
+				++virus;
 			}
 		}
 	}
 
-	// 0의 갯수를 세기.
-	int result = 0;
-	for (int y = 0; y < Y; ++y)
-	{
-		for (int x = 0; x < X; ++x)
-		{
-			if (mapCopy[y][x] == 0)
-			{
-				++result;
-			}
-		}
-	}
-
+	int result = X * Y - (virus + wallCount + 3);
 	answer = max(answer,result);
 }
 
@@ -529,28 +524,42 @@ void Laboratory()
 {
 	// Input
 	cin >> Y >> X;
+	vector<Pos> way;
 
 	for (int y = 0; y < Y; ++y)
 	{
 		for (int x = 0; x < X; ++x)
 		{
 			cin >> LaboratoryMap[y][x];
+			Pos pos;
+			pos.x = x;
+			pos.y = y;
+
+			switch (LaboratoryMap[y][x])
+			{
+			case 0: way.push_back(pos); break;
+			case 1: ++wallCount; break;
+			case 2: ++virusCount; break;
+			}
 		}
 	}
 
 	// 벽 세우고 BFS
-	for (int y = 0; y < Y; ++y)
+	for (int y = 0; y < way.size(); ++y)
 	{
-		for (int x = 0; x < X; ++x)
+		for (int x = y+1; x < way.size(); ++x)
 		{
-			// 빈칸 발견했을 경우
-			if (LaboratoryMap[y][x] == 0)
+			for (int i = x + 1; i < way.size(); ++i)
 			{
-				// 맵 정보를 복사한 뒤,
-				copy(&LaboratoryMap[0][0], &LaboratoryMap[0][0] +(Y*X), &tempMap[0][0]);
-				tempMap[y][x] = 1;
-				MakeWall(1);
-				tempMap[y][x] = 0;
+				LaboratoryMap[way[y].y][way[y].x] = 1;
+				LaboratoryMap[way[x].y][way[x].x] = 1;
+				LaboratoryMap[way[i].y][way[i].x] = 1;
+
+				Virus();
+
+				LaboratoryMap[way[y].y][way[y].x] = 0;
+				LaboratoryMap[way[x].y][way[x].x] = 0;
+				LaboratoryMap[way[i].y][way[i].x] = 0;
 			}
 		}
 	}
