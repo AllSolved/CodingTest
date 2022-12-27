@@ -17,3 +17,16 @@ int ShortestDistanceInGameMap(vector<vector<int> > maps);
 // 22.12.17 프로그래머스 단어 변환
 bool CanChange(string src, string dest);
 int ChangeWords(string begin, string target, vector<string> words);
+
+// 22.12.27 백준 14502번 연구소
+struct Pos
+{
+	int x, y;
+};
+
+// 배열은 선언만 값형으로 할 뿐, 참조형으로 전달된다.
+void Virus(int mapCopy[][8]);
+
+void Virus();
+void MakeWall(int count);
+void Laboratory();

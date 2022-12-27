@@ -1,5 +1,4 @@
 #include "BFS.h"
-using namespace std;
 
 void BFS()
 {
@@ -251,11 +250,6 @@ void JumpJump()
 	std::cout << Result << std::endl;
 }
 
-struct Pos
-{
-	int x;
-	int y;
-};
 
 int ShortestDistanceInGameMap(vector<vector<int>> maps)
 {
@@ -375,4 +369,192 @@ int ChangeWords(string begin, string target, vector<string> words)
 	}
 
 	return 0;
+}
+
+int Y, X;
+
+int dirX[] = { 0,0,1,-1 };
+int dirY[] = { -1,1,0,0 };
+
+int LaboratoryMap[8][8] = { 0 };
+
+int answer = 0;
+int tempMap[8][8] = { 0 };
+
+
+void Virus()
+{
+	queue<Pos> qVirus;
+	int mapCopy[8][8] = {0};
+	copy(&tempMap[0][0], &tempMap[0][0] + (Y * X), &mapCopy[0][0]);
+
+	for (int y = 0; y < Y; ++y)
+	{
+		for (int x = 0; x < X; ++x)
+		{
+			if (mapCopy[y][x] == 2)
+			{
+				Pos virusPos;
+				virusPos.x = x;
+				virusPos.y = y;
+
+				qVirus.push(virusPos);
+			}
+		}
+	}
+
+	while (!qVirus.empty())
+	{
+		Pos pos = qVirus.front();
+		qVirus.pop();
+
+		// 4방향을 탐색하여 바이러스를 퍼뜨림
+		for (int i = 0; i < 4; ++i)
+		{
+			Pos nextPos;
+			nextPos.x = pos.x + dirX[i];
+			nextPos.y = pos.y + dirY[i];
+
+			// 범위를 벗어날 경우
+			if ((nextPos.x >= 0 && nextPos.y >= 0 &&
+				nextPos.x < X && nextPos.y < Y) && 
+				mapCopy[nextPos.y][nextPos.x] == 0)
+			{
+				mapCopy[nextPos.y][nextPos.x] = 2;
+				qVirus.push(nextPos);
+			}
+		}
+	}
+
+	// 0의 갯수를 세기.
+	int result = 0;
+	for (int y = 0; y < Y; ++y)
+	{
+		for (int x = 0; x < X; ++x)
+		{
+			if (mapCopy[y][x] == 0)
+			{
+				++result;
+			}
+		}
+	}
+
+	answer = max(answer,result);
+}
+
+void Virus(int mapCopy[][8])
+{
+	queue<Pos> qVirus;
+
+	for (int y = 0; y < Y; ++y)
+	{
+		for (int x = 0; x < X; ++x)
+		{
+			if (mapCopy[y][x] == 2)
+			{
+				Pos virusPos;
+				virusPos.x = x;
+				virusPos.y = y;
+
+				qVirus.push(virusPos);
+			}
+		}
+	}
+
+	while (!qVirus.empty())
+	{
+		Pos pos = qVirus.front();
+		qVirus.pop();
+
+		// 4방향을 탐색하여 바이러스를 퍼뜨림
+		for (int i = 0; i < 4; ++i)
+		{
+			Pos nextPos;
+			nextPos.x = pos.x + dirX[i];
+			nextPos.y = pos.y + dirY[i];
+
+			// 범위를 벗어날 경우
+			if (nextPos.x >= 0 && nextPos.y >= 0 &&
+				nextPos.x < X && nextPos.y < Y)
+			{
+				if (mapCopy[nextPos.y][nextPos.x] == 0)
+				{
+					mapCopy[nextPos.y][nextPos.x] = 2;
+					qVirus.push(nextPos);
+				}
+			}
+		}
+	}
+
+	// 0의 갯수를 세기.
+	int result = 0;
+	for (int y = 0; y < Y; ++y)
+	{
+		for (int x = 0; x < X; ++x)
+		{
+			int value = mapCopy[y][x];
+			if (value  == 0)
+			{
+				++result;
+			}
+		}
+	}
+
+	answer = max(answer, result);
+}
+
+void MakeWall(int count)
+{
+	if (count == 3)
+	{
+		Virus();
+		return;
+	}
+
+	for (int y = 0; y < Y; ++y)
+	{
+		for (int x = 0; x < X; ++x)
+		{
+			if (tempMap[y][x] == 0)
+			{
+				tempMap[y][x] = 1;
+				MakeWall(count + 1);
+				tempMap[y][x] = 0;
+			}
+		}
+	}
+}
+
+void Laboratory()
+{
+	// Input
+	cin >> Y >> X;
+
+	for (int y = 0; y < Y; ++y)
+	{
+		for (int x = 0; x < X; ++x)
+		{
+			cin >> LaboratoryMap[y][x];
+		}
+	}
+
+	// 벽 세우고 BFS
+	for (int y = 0; y < Y; ++y)
+	{
+		for (int x = 0; x < X; ++x)
+		{
+			// 빈칸 발견했을 경우
+			if (LaboratoryMap[y][x] == 0)
+			{
+				// 맵 정보를 복사한 뒤,
+				copy(&LaboratoryMap[0][0], &LaboratoryMap[0][0] +(Y*X), &tempMap[0][0]);
+				tempMap[y][x] = 1;
+				MakeWall(1);
+				tempMap[y][x] = 0;
+			}
+		}
+	}
+
+
+	cout << answer;
 }
