@@ -65,6 +65,7 @@
     <ClCompile Include="Search.cpp">
       <Filter>Algorithm\06. Search</Filter>
     </ClCompile>
+    <ClCompile Include="Math.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GreedyAlgorithm.h">
@@ -90,5 +91,6 @@
     <ClInclude Include="Search.h">
       <Filter>Algorithm\06. Search</Filter>
     </ClInclude>
+    <ClInclude Include="Math.h" />
   </ItemGroup>
 </Project>

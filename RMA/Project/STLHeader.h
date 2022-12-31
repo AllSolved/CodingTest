@@ -14,6 +14,7 @@
 #include <utility>
 #include <numeric>
 
+using namespace std;
 #define PI 3.141592
 
 
