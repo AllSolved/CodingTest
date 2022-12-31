@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClCompile Include="BFS.cpp" />
     <ClCompile Include="DFS.cpp" />
+    <ClCompile Include="DP.cpp" />
     <ClCompile Include="etc.cpp" />
     <ClCompile Include="GreedyAlgorithm.cpp" />
     <ClCompile Include="Implementation.cpp" />
@@ -158,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="BFS.h" />
     <ClInclude Include="DFS.h" />
+    <ClInclude Include="DP.h" />
     <ClInclude Include="etc.h" />
     <ClInclude Include="GreedyAlgorithm.h" />
     <ClInclude Include="Implementation.h" />
