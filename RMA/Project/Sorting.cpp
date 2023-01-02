@@ -218,3 +218,41 @@ int HIndex(vector<int> citations)
 
 	return answer;
 }
+
+
+long long WorkOverTime(int n, vector<int> works)
+{
+	long long answer = 0;
+	priority_queue<int> q;
+
+	int totalTime = 0;
+	for (int i = 0; i < works.size(); ++i)
+	{
+		totalTime += works[i];
+		q.push(works[i]);
+	}
+
+	if (totalTime <= n)
+	{
+		return 0;
+	}
+
+	while (n != 0)
+	{
+		int maxTime = q.top();
+		q.pop();
+
+		if (maxTime != 0) --maxTime;
+
+		q.push(maxTime);
+		--n;
+	}
+
+	while (!q.empty())
+	{
+		answer += q.top() * q.top();
+		q.pop();
+	}
+
+	return answer;
+}

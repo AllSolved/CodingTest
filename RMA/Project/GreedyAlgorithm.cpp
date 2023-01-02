@@ -1,6 +1,4 @@
 #include "GreedyAlgorithm.h"
-#include <algorithm>
-#include <vector>
 
 using namespace std;
 //21. 8.8 ¿¹Á¦ 1
@@ -549,6 +547,39 @@ void MissingParentheses()
             number += expression[i];
         }
 
+    }
+
+    cout << answer;
+}
+
+void Sensor()
+{
+    int answer = 0;
+    int N, K;
+    cin >> N >> K;
+
+    vector<int> vSensor;
+    for (int i = 0; i < N; ++i)
+    {
+        int pos;
+        cin >> pos;
+        vSensor.push_back(pos);
+    }
+
+    sort(vSensor.begin(), vSensor.end());
+
+
+    vector<int> vDistance;
+    for (int i = 1; i < N; ++i)
+    {
+        vDistance.push_back(vSensor[i] - vSensor[i - 1]);
+    }
+
+    sort(vDistance.begin(), vDistance.end());
+
+    if (N >= K)
+    {
+        answer = accumulate(vDistance.begin(), vDistance.begin() + (N - K), 0);
     }
 
     cout << answer;

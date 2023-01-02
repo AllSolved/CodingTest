@@ -12,7 +12,9 @@
 #include <queue>
 #include <math.h>
 #include <utility>
+#include <numeric>
 
+using namespace std;
 #define PI 3.141592
 
 

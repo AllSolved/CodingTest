@@ -42,3 +42,6 @@ int LinkIsland(int n,vector<vector<int>> costs);
 
 // 22.12.26 백준 1541번 잃어버린 괄호
 void MissingParentheses();
+
+// 22.12.30 백준 2212번 센서
+void Sensor();
