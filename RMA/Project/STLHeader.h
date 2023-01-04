@@ -13,6 +13,7 @@
 #include <math.h>
 #include <utility>
 #include <numeric>
+#include <cmath>
 
 using namespace std;
 #define PI 3.141592
