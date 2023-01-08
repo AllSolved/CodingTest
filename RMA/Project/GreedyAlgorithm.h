@@ -45,3 +45,4 @@ void MissingParentheses();
 
 // 22.12.30 백준 2212번 센서
 void Sensor();
+void Sensor1();

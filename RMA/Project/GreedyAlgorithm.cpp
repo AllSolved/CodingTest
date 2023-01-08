@@ -585,6 +585,41 @@ void Sensor()
     cout << answer;
 }
 
+void Sensor1()
+{
+    int N, K, answer = { 0 };
+	int sensor[10001] = { 0 };
+
+	cin >> N >> K;
+
+	for (int i = 0; i < N; ++i)
+	{
+		cin >> sensor[i];
+	}
+
+	sort(sensor, sensor + N);
+
+	vector<int> vDistance;
+	// 마지막 센서는 거리를 잴 센서가 없으므로
+	for (int i = 1; i < N; ++i)
+	{
+		vDistance.push_back(sensor[i] - sensor[i - 1]);
+	}
+
+	// |--집중국--| 빈공간 |----집중국----| 빈 공간이 가장 큰 부분을 제외하고 더하면 된다.
+	// 따라서 내림차순으로 정렬을 한 뒤 k-1개부터 빈공간을 더한다
+	sort(vDistance.begin(), vDistance.end(), greater<int>());
+
+	// K-1개 만큼 빈공간이 생기기 때문에 K-1로 순회
+	for (int i = K-1; i < vDistance.size(); ++i)
+	{
+		answer += vDistance[i];
+	}
+
+	cout << answer;
+
+}
+
 
 
 

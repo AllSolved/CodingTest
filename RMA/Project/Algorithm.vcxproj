@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BFS.cpp" />
+    <ClCompile Include="DataStructure.cpp" />
     <ClCompile Include="DFS.cpp" />
     <ClCompile Include="DP.cpp" />
     <ClCompile Include="etc.cpp" />
@@ -158,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BFS.h" />
+    <ClInclude Include="DataStructure.h" />
     <ClInclude Include="DFS.h" />
     <ClInclude Include="DP.h" />
     <ClInclude Include="etc.h" />
