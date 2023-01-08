@@ -102,3 +102,46 @@ vector<string> CardGame(vector<string> card, vector<string> word)
     return answer;
 
 }
+
+int MakeBtoA(string before, string after)
+{
+    int answer = 1;
+    unordered_map<char, int> beforeTable;
+    unordered_map<char, int> afterTable;
+
+    // 단어를 등록
+    for (int i = 0; i < before.length(); ++i)
+    {
+        // table에 없을 경우
+        if (beforeTable.find(before[i]) == beforeTable.end())
+            beforeTable[before[i]] = 1;
+        else
+            ++beforeTable[before[i]];
+
+        if (afterTable.find(after[i]) == afterTable.end())
+            afterTable[after[i]] = 1;
+        else
+            ++afterTable[after[i]];
+    }
+
+
+    //문자열의 글자가 같은지, 글자 갯수가 같은지 확인
+    auto iter = afterTable.begin();
+    auto iterEnd = afterTable.end();
+
+    for (; iter != iterEnd; ++iter)
+    {
+        // 알파벳이 존재하지 않을 경우
+        if (beforeTable.find(iter->first) == beforeTable.end())
+            return 0;
+
+        // 알파벳이 존재하는 경우 철자 수까지 확인함
+        else
+        {
+            if (beforeTable[iter->first] != iter->second)
+                return 0;
+        }
+    }
+
+    return answer;
+}

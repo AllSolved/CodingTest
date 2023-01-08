@@ -7,3 +7,8 @@ string MaxMin(string s);
 
 bool CheckLine(bool* arr, int findCount, string currentWord);
 vector<string> CardGame(vector<string> card, vector<string> word);
+
+
+#pragma region ¹®ÀÚ¿­
+int MakeBtoA(string before, string after);
+#pragma endregion
