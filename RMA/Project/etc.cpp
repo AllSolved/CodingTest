@@ -145,3 +145,47 @@ int MakeBtoA(string before, string after)
 
     return answer;
 }
+
+string MorseSign(string letter)
+{
+    string answer = "";
+    string morse = "'.-':'a','-...':'b','-.-.':'c','-..':'d','.':'e','..-.':'f','--.':'g','....':'h','..':'i','.---':'j','-.-':'k','.-..':'l','--':'m','-.':'n','---':'o','.--.':'p','--.-':'q','.-.':'r','...':'s','-':'t','..-':'u','...-':'v','.--':'w','-..-':'x','-.--':'y','--..':'z'";
+
+    // Map을 만들어서 table제작
+    map<string, char> morseTable;
+    string morseSign = "";
+    for (int i = 0; i < morse.length(); ++i)
+    {
+        if (morse[i] == '.' || morse[i] == '-')
+        {
+            morseSign += morse[i];
+        }
+
+        // 문자 일 경우
+        else if (morse[i] >= 'a' && morse[i] <= 'z')
+        {
+            morseTable[morseSign] = morse[i];
+            morseSign.clear();
+        }
+    }
+
+    string morseLetter = "";
+    for (int i = 0; i < letter.length(); ++i)
+    {
+        if (letter[i] != ' ')
+        {
+            morseLetter += letter[i];
+        }
+
+        else
+        {
+            answer += morseTable[morseLetter];
+            morseLetter.clear();
+        }
+    }
+
+    // 마지막 철자는 저장
+    answer += morseTable[morseLetter];
+
+    return answer;
+}
