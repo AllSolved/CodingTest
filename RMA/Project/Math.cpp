@@ -65,3 +65,23 @@ void BinomialCoefficient()
 
 	cout << A * B % mod;
 }
+
+void DistributedProcessing()
+{
+    int T,a,b,answer;
+    cin >> T;
+
+    for (int i = 0; i < T; ++i)
+    {
+        answer = 1;
+        cin >> a >> b;
+
+        for (int j = 0; i < b; ++j)
+        {
+            answer = (answer * a) % 10;
+        }
+
+        answer = answer == 0 ? 10 : answer;
+        cout << answer << '\n';
+    }
+}
