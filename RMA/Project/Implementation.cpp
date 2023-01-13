@@ -474,3 +474,28 @@ void Message()
 	std::cout << result;
 
 }
+
+vector<int> BestSet(int n, int s)
+{
+	vector<int> answer;
+
+	int q = s / n;
+	int mod = s % n;
+
+	if (q != 0)
+	{
+		for (int i = 0; i < n; ++i)
+			answer.push_back(q);
+
+		for (int i = answer.size() - 1; mod != 0; --i)
+		{
+			++answer[i];
+			--mod;
+		}
+	}
+
+	else
+		answer.push_back(-1);
+
+	return answer;
+}
