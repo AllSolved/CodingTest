@@ -10,3 +10,6 @@ void Pibo();
 
 // 23.1.15 프로그래머스 : 등굣길
 int TheWayToSchool(int m, int n, vector<vector<int>> puddles);
+
+// 22.1.18 백준 1149번 : RGB거리
+void RGBStreet();
