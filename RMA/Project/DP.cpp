@@ -1,6 +1,6 @@
 #include "DP.h"
 
-void NormalBagpack()
+void NormalBackpack()
 {
     int N, K;
     int DP[101][100001];
@@ -25,6 +25,42 @@ void NormalBagpack()
     }
 
     cout << DP[N][K];
+}
+
+int stuff[101][2];
+int dp[101][100001];
+void NormalBackpack2()
+{
+    int N = 0;
+    int K = 0;
+
+
+    cin >> N >> K;
+    for (int i = 1; i < N; ++i)
+    {
+        cin >> stuff[i][0] >> stuff[i][1];
+    }
+
+    // 수
+	for (int i = 1; i <= N; ++i)
+	{
+		// 무게
+		for (int j = 1; j <= K; ++j)
+		{
+			// 현재 못 넣는 무게 일 경우
+			if (j  < stuff[i][0])
+				dp[i][j] = dp[i - 1][j];
+			// 있는 경우 이전까지의 무게와, 현재 무게의 가치 + 넣을 수 있는 무게의 가치의 합을 비교
+			else
+				dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - stuff[i][0]] + stuff[i][1]);
+
+            cout << dp[i][j] << ' ';
+		}
+
+        cout << endl;
+	}
+
+    cout << dp[N][K];
 }
 
 void Pibo()
@@ -97,7 +133,7 @@ void RGBStreet()
         }
     }
 
-    for (int i = 0; i < N; ++i)
+    for (int i = 1; i < N; ++i)
     {
         dp[i][0] += min(dp[i - 1][1], dp[i - 1][2]);
         dp[i][1] += min(dp[i - 1][0], dp[i - 1][2]);
