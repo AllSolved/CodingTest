@@ -567,3 +567,78 @@ void Laboratory()
 
 	cout << answer;
 }
+
+
+char cave[101][101];
+int X, Y, N;
+int order[101];
+int dirX[4] = { 1,0,-1,0 };
+int dirY[4] = { 0,1,0,-1 };
+
+void Mineral()
+{
+	cin >> Y >> X;
+	for (int y = 0; y < Y; ++y)
+	{
+		for (int x = 0; x < X; ++x)
+		{
+			cin >> cave[y][x];
+		}
+	}
+
+	cin >> N;
+
+	// 배열을 탐색하기 편하게 높이를 바꿔서 넣어준다
+	for (int i = 0; i < N; ++i)
+	{
+		cin >> order[i];
+		order[i] = Y - order[i];
+	}
+
+	// 1. 막대기를 던져 미네랄을 파괴
+	for (int i = 0; i < N; ++i)
+	{
+		// 짝수일 경우 왼->오 파괴
+		if (i % 2 == 0)
+		{
+			for (int x = 0; x < X; ++x)
+			{
+				// 미네랄일 경우 깨뜨림
+				if (cave[i][x] == 'x')
+				{
+					cave[i][x] = '.';
+					break;
+				}
+			}
+		}
+
+		else
+		{
+			for (int x = X - 1; x >= 0; --x)
+			{
+				if (cave[i][x] == 'x')
+				{
+					cave[i][x] = '.';
+					break;
+				}
+			}
+		}
+
+		// 2. 공중에 떠있는 클러스터 영역을 체크
+		
+
+
+	}
+
+
+	// Output
+	for (int y = 0; y < Y; ++y)
+	{
+		for (int x = 0; x < X; ++x)
+		{
+			cout << cave[y][x];
+		}
+
+		cout << endl;
+	}
+}

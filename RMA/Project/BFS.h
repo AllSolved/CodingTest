@@ -22,6 +22,13 @@ int ChangeWords(string begin, string target, vector<string> words);
 struct Pos
 {
 	int x, y;
+
+	Pos() {}
+	Pos(int _x, int _y)
+	{
+		x = _x;
+		y = _y;
+	}
 };
 
 // 배열은 선언만 값형으로 할 뿐, 참조형으로 전달된다.
@@ -30,3 +37,6 @@ void MakeWall(int count);
 
 void Virus();
 void Laboratory();
+
+// 23.1.26 백준 2993번 : 미네랄
+void Mineral();
