@@ -23,7 +23,7 @@ struct Pos
 {
 	int x, y;
 
-	Pos() {}
+	Pos() : x(0),y(0) {}
 	Pos(int _x, int _y)
 	{
 		x = _x;
@@ -40,3 +40,4 @@ void Laboratory();
 
 // 23.1.26 백준 2993번 : 미네랄
 void Mineral();
+void CheckCluster(Pos pos);

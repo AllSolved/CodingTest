@@ -570,10 +570,8 @@ void Laboratory()
 
 
 char cave[101][101];
-int X, Y, N;
-int order[101];
-int dirX[4] = { 1,0,-1,0 };
-int dirY[4] = { 0,1,0,-1 };
+int order[101] = {0};
+int Visit[101][101] = { false };
 
 void Mineral()
 {
@@ -582,10 +580,11 @@ void Mineral()
 	{
 		for (int x = 0; x < X; ++x)
 		{
-			cin >> cave[y][x];
+			cin >> cave[x][y];
 		}
 	}
 
+	int N = 0;
 	cin >> N;
 
 	// 배열을 탐색하기 편하게 높이를 바꿔서 넣어준다
@@ -604,9 +603,9 @@ void Mineral()
 			for (int x = 0; x < X; ++x)
 			{
 				// 미네랄일 경우 깨뜨림
-				if (cave[i][x] == 'x')
+				if (cave[x][order[i]] == 'x')
 				{
-					cave[i][x] = '.';
+					cave[x][order[i]] = '.';
 					break;
 				}
 			}
@@ -616,18 +615,59 @@ void Mineral()
 		{
 			for (int x = X - 1; x >= 0; --x)
 			{
-				if (cave[i][x] == 'x')
+				if (cave[x][order[i]] == 'x')
 				{
-					cave[i][x] = '.';
+					cave[x][order[i]] = '.';
 					break;
 				}
 			}
 		}
 
-		// 2. 공중에 떠있는 클러스터 영역을 체크
-		
+		// 2. 공중에 떠있는 클러스터 영역을 체크한 뒤 저장
+		// Visit 배열 초기화
+		for (int y = 0; y < Y; ++y)
+		{
+			for (int x = 0; x < X; ++x)
+			{
+				Visit[x][y] = false;
+			}
+		}
 
+		// BFS로 영역 탐색
+		for (int x = 0; x < X; ++x)
+		{
+			if (cave[x][Y - 1] == 'x' && Visit[x][Y - 1] == false)
+			{
+				CheckCluster(Pos(x, Y - 1));
+			}
+		}
 
+		vector<Pos> vAirCluster;
+		for (int y = 0; y < Y; ++y)
+		{
+			for (int x = 0; x < X; ++x)
+			{
+				if (Visit[x][y] == false && cave[x][y] == 'x')
+					vAirCluster.push_back(Pos(x, y));
+			}
+		}
+
+		// 3. 클러스터를 내려준다.
+		for (int i = 0; i < vAirCluster.size(); ++i)
+		{
+			int depth = 0;
+			Pos pos = vAirCluster[i];
+			for (int y = pos.y + 1; y < Y; ++y)
+			{
+				if (cave[pos.x][y] == '.')
+					++depth;
+				else
+					break;
+			}
+
+			cave[pos.x][pos.y] = '.';
+			cave[pos.x][pos.y + depth] = 'x';
+		}
 	}
 
 
@@ -636,9 +676,38 @@ void Mineral()
 	{
 		for (int x = 0; x < X; ++x)
 		{
-			cout << cave[y][x];
+			cout << cave[x][y];
 		}
 
 		cout << endl;
+	}
+}
+
+void CheckCluster(Pos pos)
+{
+	queue<Pos> qCluster;
+	qCluster.push(pos);
+	Visit[pos.x][pos.y] = true;
+
+	while (!qCluster.empty())
+	{
+		Pos pos = qCluster.front();
+		qCluster.pop();
+
+		for (int i = 0; i < 4; ++i)
+		{
+			Pos nextPos(pos.x + dirX[i], pos.y + dirY[i]);
+
+			if (nextPos.x >= 0 && nextPos.y >= 0 &&
+				nextPos.x < X && nextPos.y < Y)
+			{
+				if ((Visit[nextPos.x][nextPos.y] == false) &&
+					cave[nextPos.x][nextPos.y] == 'x')
+				{
+					Visit[nextPos.x][nextPos.y] = true;
+					qCluster.push(nextPos);
+				}
+			}
+		}
 	}
 }
