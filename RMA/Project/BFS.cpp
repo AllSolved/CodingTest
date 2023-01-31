@@ -580,7 +580,7 @@ void Mineral()
 	{
 		for (int x = 0; x < X; ++x)
 		{
-			cin >> cave[x][y];
+			cin >> cave[y][x];
 		}
 	}
 
@@ -597,15 +597,17 @@ void Mineral()
 	// 1. 막대기를 던져 미네랄을 파괴
 	for (int i = 0; i < N; ++i)
 	{
+		bool isDifferent = false;
 		// 짝수일 경우 왼->오 파괴
 		if (i % 2 == 0)
 		{
 			for (int x = 0; x < X; ++x)
 			{
 				// 미네랄일 경우 깨뜨림
-				if (cave[x][order[i]] == 'x')
+				if (cave[order[i]][x] == 'x')
 				{
-					cave[x][order[i]] = '.';
+					cave[order[i]][x] = '.';
+					isDifferent = true;
 					break;
 				}
 			}
@@ -615,58 +617,85 @@ void Mineral()
 		{
 			for (int x = X - 1; x >= 0; --x)
 			{
-				if (cave[x][order[i]] == 'x')
+				if (cave[order[i]][x] == 'x')
 				{
-					cave[x][order[i]] = '.';
+					cave[order[i]][x] = '.';
+					isDifferent = true;
 					break;
 				}
 			}
 		}
 
+		if (!isDifferent) continue;
+
 		// 2. 공중에 떠있는 클러스터 영역을 체크한 뒤 저장
-		// Visit 배열 초기화
+		// visit 배열 다시 초기화
 		for (int y = 0; y < Y; ++y)
 		{
 			for (int x = 0; x < X; ++x)
 			{
-				Visit[x][y] = false;
+				Visit[y][x] = false;
 			}
 		}
 
 		// BFS로 영역 탐색
 		for (int x = 0; x < X; ++x)
 		{
-			if (cave[x][Y - 1] == 'x' && Visit[x][Y - 1] == false)
+			if (cave[Y - 1][x] == 'x' && Visit[Y - 1][x] == false)
 			{
 				CheckCluster(Pos(x, Y - 1));
 			}
 		}
 
+		// 3. 클러스터 덩어리를 깊이가 깊은 순서부터 탐색한 뒤 담아준다.
+		bool isAirCluster = false;
 		vector<Pos> vAirCluster;
-		for (int y = 0; y < Y; ++y)
+		for (int y = Y-1; y >= 0; --y)
 		{
 			for (int x = 0; x < X; ++x)
 			{
-				if (Visit[x][y] == false && cave[x][y] == 'x')
+				if (Visit[y][x] == false && cave[y][x] == 'x')
+				{
 					vAirCluster.push_back(Pos(x, y));
+					isAirCluster = true;
+				}
 			}
 		}
 
-		// 3. 클러스터를 내려준다.
+		if (!isAirCluster) continue;
+
+		// 반례 -> 클러스터 덩어리 중 적게 내려가도 덩어리가 형성되는 경우의 수를 생각해야 함 (바닥까지 가장 짧은 거리)
+		int depth = 101;
 		for (int i = 0; i < vAirCluster.size(); ++i)
 		{
-			int depth = 0;
 			Pos pos = vAirCluster[i];
+			int currentDepth = 0;
 			for (int y = pos.y + 1; y < Y; ++y)
 			{
-				if (cave[pos.x][y] == '.')
-					++depth;
-				else
-					break;
-			}
+				// 빈칸일 경우 내려줌
+				if (cave[y][pos.x] == '.')
+					++currentDepth;
 
-			cave[pos.x][pos.y] = '.';
-			cave[pos.x][pos.y + depth] = 'x';
+				// 같이 공중에 떠있는 클러스터라면 
+				else if (cave[y][pos.x] == 'x')
+				{
+					if(!Visit[y][pos.x])
+						currentDepth = 102;
+
+					else
+						break;
+				}
+			}
+			
+			depth = min(currentDepth, depth);
+		}
+
+		for (int i = 0; i < vAirCluster.size(); ++i)
+		{
+			// 가장 깊게 내려가는 경우의 수를 체크하면서 다른 미네랄에 닿는지 확인해야한다.
+			Pos pos = vAirCluster[i];
+			cave[pos.y][pos.x] = '.';
+			cave[pos.y + depth][pos.x] = 'x';
 		}
 	}
 
@@ -676,7 +705,7 @@ void Mineral()
 	{
 		for (int x = 0; x < X; ++x)
 		{
-			cout << cave[x][y];
+			cout << cave[y][x];
 		}
 
 		cout << endl;
@@ -685,9 +714,10 @@ void Mineral()
 
 void CheckCluster(Pos pos)
 {
+	
 	queue<Pos> qCluster;
 	qCluster.push(pos);
-	Visit[pos.x][pos.y] = true;
+	Visit[pos.y][pos.x] = true;
 
 	while (!qCluster.empty())
 	{
@@ -701,10 +731,10 @@ void CheckCluster(Pos pos)
 			if (nextPos.x >= 0 && nextPos.y >= 0 &&
 				nextPos.x < X && nextPos.y < Y)
 			{
-				if ((Visit[nextPos.x][nextPos.y] == false) &&
-					cave[nextPos.x][nextPos.y] == 'x')
+				if ((Visit[nextPos.y][nextPos.x] == false) &&
+					cave[nextPos.y][nextPos.x]== 'x')
 				{
-					Visit[nextPos.x][nextPos.y] = true;
+					Visit[nextPos.y][nextPos.x] = true;
 					qCluster.push(nextPos);
 				}
 			}
