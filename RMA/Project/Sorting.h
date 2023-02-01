@@ -20,4 +20,4 @@ int HIndex(vector<int> citations);
 long long WorkOverTime(int n, vector<int> works);
 
 // 22.2.1 프로그래머스 숫자 게임
-vector<int> NumberGame(vector<int> A, vector<int> B);
+int NumberGame(vector<int> A, vector<int> B);

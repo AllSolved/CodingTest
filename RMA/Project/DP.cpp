@@ -67,7 +67,7 @@ void Pibo()
 {
 	int dp[46] = { 0 };
 
-	int n, answer;
+	int n;
 	cin >> n;
 
 	dp[1] = 1;

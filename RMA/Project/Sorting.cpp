@@ -257,7 +257,32 @@ long long WorkOverTime(int n, vector<int> works)
 	return answer;
 }
 
-vector<int> NumberGame(vector<int> A, vector<int> B)
+int NumberGame(vector<int> A, vector<int> B)
 {
-	return vector<int>();
+	int answer = 0;
+	priority_queue<int> aQ;
+	priority_queue<int> bQ;
+
+	for (int i = 0; i < A.size(); ++i)
+	{
+		aQ.push(A[i]);
+		bQ.push(B[i]);
+	}
+
+	while (!aQ.empty())
+	{
+		int aNumber = aQ.top();
+		aQ.pop();
+
+		int bNumber = bQ.top();
+
+		if (bNumber > aNumber)
+		{
+			++answer;
+			bQ.pop();
+		}
+	}
+
+	return answer;
 }
+
