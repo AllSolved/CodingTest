@@ -18,3 +18,6 @@ int HIndex(vector<int> citations);
 
 // 22.12.2 프로그래머스 H-Index
 long long WorkOverTime(int n, vector<int> works);
+
+// 22.2.1 프로그래머스 숫자 게임
+vector<int> NumberGame(vector<int> A, vector<int> B);

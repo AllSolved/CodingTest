@@ -256,3 +256,8 @@ long long WorkOverTime(int n, vector<int> works)
 
 	return answer;
 }
+
+vector<int> NumberGame(vector<int> A, vector<int> B)
+{
+	return vector<int>();
+}
