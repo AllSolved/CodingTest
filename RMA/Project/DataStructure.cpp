@@ -158,3 +158,65 @@ vector<int> DoublePriorityQueue2(vector<string> operations)
 
     return answer;
 }
+
+bool Compare(pair<int, int>& a, pair<int, int>& b)
+{
+    if (a.first == b.first)
+        return a.second < b.second;
+    return a.first > b.first;
+}
+
+vector<int> BestAlbum(vector<string> genres, vector<int> plays)
+{
+    vector<int> answer;
+    map<string, int> playsTable;             // 재생 횟수 계산
+    map<string, vector<int>> musicTable;    // 고유 번호 등록
+
+    for (int i = 0; i < genres.size(); ++i)
+    {
+        // 재생 횟수를 계산
+        playsTable[genres[i]] += plays[i];
+
+        if (musicTable.find(genres[i]) == musicTable.end())
+        {
+            vector<int> v;
+            v.push_back(i);
+            musicTable.insert({ genres[i], v });
+        }
+
+        else
+            musicTable[genres[i]].push_back(i);
+    }
+
+    map<int, string, greater<int>> playsCount;
+    for (auto iter : playsTable)
+    {
+        playsCount.insert({ iter.second, iter.first });
+    }
+
+    // 재생 횟수가 많은 장르 중 고유 번호가 낮은 순으로 정렬
+    for (auto iter : playsCount)
+    {
+        string name = iter.second;
+        vector<int> v = musicTable[name];
+
+        // 재생 횟수를 기준으로 다시 정렬해준다
+        vector<pair<int, int>> vPlay;
+        for (int i = 0; i < v.size(); ++i)
+        {
+            pair<int, int> value(plays[v[i]], v[i]);
+            vPlay.push_back(value);
+        }
+
+        sort(vPlay.begin(), vPlay.end(), Compare);
+        for (int i = 0; i < vPlay.size(); ++i)
+        {
+            if (i == 2)
+                break;
+
+            answer.push_back(vPlay[i].second);
+        }
+    }
+
+    return answer;
+}
