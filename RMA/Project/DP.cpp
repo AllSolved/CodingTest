@@ -143,3 +143,20 @@ void RGBStreet()
     cout << min({ dp[N - 1][0],dp[N - 1][1],dp[N - 1][2] });
 
 }
+
+void Pibo3()
+{
+    int n; 
+
+    cin >> n;
+    vector<long long> pibo;
+    pibo.resize(n+1);
+    pibo[0] = 0;
+    pibo[1] = 1;
+    for (int i = 2; i <= n; ++i)
+    {
+        pibo[i] = (pibo[i - 1] + pibo[i - 2]) % 1000000;
+    }
+
+    cout << pibo[n];
+}

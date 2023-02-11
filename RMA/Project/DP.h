@@ -15,3 +15,6 @@ int TheWayToSchool(int m, int n, vector<vector<int>> puddles);
 // 22.1.18 백준 1149번 : RGB거리
 void RGBStreet();
 
+
+// 23.1.9 백준 2749번 : 피보나치 수
+void Pibo3();
