@@ -46,3 +46,6 @@ void MissingParentheses();
 // 22.12.30 백준 2212번 센서
 void Sensor();
 void Sensor1();
+
+// 23.2.12 프로그래머스 : 기지국 설치
+int InstallBaseStation(int n, vector<int> stations, int w);

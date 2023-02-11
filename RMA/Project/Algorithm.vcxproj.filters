@@ -81,9 +81,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GreedyAlgorithm.h">
-      <Filter>Algorithm\01. GreedyAlgorithm</Filter>
-    </ClInclude>
     <ClInclude Include="Implementation.h">
       <Filter>Algorithm\02. Implementation</Filter>
     </ClInclude>
@@ -114,6 +111,9 @@
     </ClInclude>
     <ClInclude Include="DataStructure.h">
       <Filter>Algorithm\10.DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="GreedyAlgorithm.h">
+      <Filter>Algorithm\02. Implementation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
