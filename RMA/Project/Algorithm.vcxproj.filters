@@ -43,6 +43,12 @@
     <Filter Include="Algorithm\10.DataStructure">
       <UniqueIdentifier>{d9fa2292-4b67-4ba9-b7fa-76e2dc470a3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DataStructure">
+      <UniqueIdentifier>{f95857ee-1bbc-4a0a-a715-d937e92b9885}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructure\Vector">
+      <UniqueIdentifier>{cd04a17d-7bb0-4e8a-9461-a0e35d9f0a78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -79,6 +85,9 @@
     <ClCompile Include="DataStructure.cpp">
       <Filter>Algorithm\10.DataStructure</Filter>
     </ClCompile>
+    <ClCompile Include="MyVector.cpp">
+      <Filter>DataStructure\Vector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Implementation.h">
@@ -114,6 +123,9 @@
     </ClInclude>
     <ClInclude Include="GreedyAlgorithm.h">
       <Filter>Algorithm\02. Implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="MyVector.h">
+      <Filter>DataStructure\Vector</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

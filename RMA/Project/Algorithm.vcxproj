@@ -153,6 +153,7 @@
     <ClCompile Include="Implementation.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="MyVector.cpp" />
     <ClCompile Include="Search.cpp" />
     <ClCompile Include="Sorting.cpp" />
     <ClCompile Include="CodingTest.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="GreedyAlgorithm.h" />
     <ClInclude Include="Implementation.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="MyVector.h" />
     <ClInclude Include="Search.h" />
     <ClInclude Include="Sorting.h" />
     <ClInclude Include="STLHeader.h" />
