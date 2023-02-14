@@ -220,3 +220,58 @@ vector<int> BestAlbum(vector<string> genres, vector<int> plays)
 
     return answer;
 }
+
+// 다른게 중첩되는 경우의 수에 대하여 생각해보아야 함
+int BannedUser(vector<string> user_id, vector<string> banned_id)
+{
+    map<string, int> userTable;
+    map<string, int> bannedTable;
+
+    for (int i = 0; i < user_id.size(); ++i)
+    {
+        userTable.insert({ user_id[i],0 });
+    }
+
+    for (int i = 0; i < banned_id.size(); ++i)
+    {
+        bannedTable.insert({ banned_id[i],0 });
+    }
+
+    auto iter = bannedTable.begin();
+    auto iterEnd = bannedTable.end();
+
+    int overlapCount = 0;
+
+    for (; iter != iterEnd; ++iter)
+    {
+        string bannedID = iter->first;
+        auto userIter = userTable.begin();
+        auto userIterEnd = userTable.end();
+
+        for (; userIter != userIterEnd; ++userIter)
+        {
+            string userID = userIter->first;
+            // 글자 수가 같다면 전부 매칭되는지 확인 
+            if (userID.length() == bannedID.length())
+            {
+                int matchCount = 0;
+                for (int i = 0; i < bannedID.length(); ++i)
+                {
+                    if (bannedID[i] == '*' || userID[i] == bannedID[i])
+                    {
+                        ++matchCount;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                iter->second = matchCount == bannedID.length() ? ++(iter->second) : iter->second;
+            }
+        }
+        overlapCount = max(iter->second, overlapCount);
+    }
+
+
+    return overlapCount;
+}

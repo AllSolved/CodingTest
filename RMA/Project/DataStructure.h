@@ -13,6 +13,7 @@ vector<int> DoublePriorityQueue2(vector<string> operations);
 #pragma region Hash
 bool Compare(pair<int, int>& a, pair<int, int>& b);
 vector<int> BestAlbum(vector<string> genres, vector<int> plays);
+int BannedUser(vector<string> user_id, vector<string> banned_id);
 #pragma endregion
 
 
