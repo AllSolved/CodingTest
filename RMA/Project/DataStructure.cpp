@@ -221,57 +221,58 @@ vector<int> BestAlbum(vector<string> genres, vector<int> plays)
     return answer;
 }
 
+bool CheckIdMatch(string a, string b)
+{
+    if (a.size() != b.size()) return false;
+
+    for (int i = 0; i < a.size(); i++) {
+        if (b[i] == '*') continue;
+        if (a[i] != b[i]) return false;
+    }
+
+    return true;
+}
+
 // 다른게 중첩되는 경우의 수에 대하여 생각해보아야 함
 int BannedUser(vector<string> user_id, vector<string> banned_id)
 {
-    map<string, int> userTable;
-    map<string, int> bannedTable;
+    set<vector<string> > s;
+    sort(user_id.begin(), user_id.end());//permutation을 위해 정렬
 
-    for (int i = 0; i < user_id.size(); ++i)
+    vector<int> v;
+    for (int i = 0; i < user_id.size(); i++)
     {
-        userTable.insert({ user_id[i],0 });
+        v.push_back(0);
     }
-
-    for (int i = 0; i < banned_id.size(); ++i)
+    for (int i = 0; i < banned_id.size(); i++)
     {
-        bannedTable.insert({ banned_id[i],0 });
-    }
+        v[i] += 1;
+    } // n P r
 
-    auto iter = bannedTable.begin();
-    auto iterEnd = bannedTable.end();
-
-    int overlapCount = 0;
-
-    for (; iter != iterEnd; ++iter)
-    {
-        string bannedID = iter->first;
-        auto userIter = userTable.begin();
-        auto userIterEnd = userTable.end();
-
-        for (; userIter != userIterEnd; ++userIter)
+    do {
+        vector<string> tmp;
+        for (int i = 0; i < user_id.size(); i++)
         {
-            string userID = userIter->first;
-            // 글자 수가 같다면 전부 매칭되는지 확인 
-            if (userID.length() == bannedID.length())
+            if (v[i] == 1) 
             {
-                int matchCount = 0;
-                for (int i = 0; i < bannedID.length(); ++i)
+                if (CheckIdMatch(user_id[i], banned_id[i])) 
                 {
-                    if (bannedID[i] == '*' || userID[i] == bannedID[i])
-                    {
-                        ++matchCount;
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    tmp.push_back(user_id[i]);
                 }
-                iter->second = matchCount == bannedID.length() ? ++(iter->second) : iter->second;
             }
         }
-        overlapCount = max(iter->second, overlapCount);
-    }
 
+        sort(tmp.begin(), tmp.end());
 
-    return overlapCount;
+        if (tmp.size() == banned_id.size())
+        {
+            s.insert(tmp);
+        }
+
+    } 
+    while (next_permutation(user_id.begin(), user_id.end()));
+    //생성된 순열을 순회하며 user_id, banned_id를 확인한다. 일치하면 tmp 배열에 추가한다.
+    //정렬과 set을 통해 중복을 제거하고 길이가 조건에 맞으면 insert
+
+    return s.size();
 }
