@@ -8,12 +8,7 @@ string MaxMin(string s);
 bool CheckLine(bool* arr, int findCount, string currentWord);
 vector<string> CardGame(vector<string> card, vector<string> word);
 
+// 23.8.17 프로그래머스 : 피보나치 수
+int Fibo(int n);
 
-#pragma region 문자열
-// 23.1.8 프로그래머스 : A로 B만들기
-int MakeBtoA(string before, string after);
-
-// 23.1.9 프로그래머스 : 모스부호(1)
-string MorseSign(string letter);
-#pragma endregion
 
