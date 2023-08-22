@@ -17,6 +17,9 @@ vector<int> BestAlbum(vector<string> genres, vector<int> plays);
 // 프로그래머스 : 불량 사용자
 bool CheckIdMatch(string a, string b);
 int BannedUser(vector<string> user_id, vector<string> banned_id);
+
+// 23.8.23 프로그래머스 : 올바른 괄호
+bool CorrectParentheses(string s);
 #pragma endregion
 
 

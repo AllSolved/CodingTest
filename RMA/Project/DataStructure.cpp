@@ -276,3 +276,25 @@ int BannedUser(vector<string> user_id, vector<string> banned_id)
 
     return s.size();
 }
+
+bool CorrectParentheses(string s)
+{
+    stack<char> _stack;
+
+    for (int i = 0; i < s.length(); ++i)
+    {
+        if (s[i] == '(')
+            _stack.push(s[i]);
+        else
+        {
+            if (_stack.size() == 0)
+            {
+                return false;
+            }
+            _stack.pop();
+        }
+    }
+
+    bool answer = _stack.size() > 0 ? false : true;
+    return answer;
+}
