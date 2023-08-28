@@ -66,6 +66,7 @@ void BinomialCoefficient()
 	cout << A * B % mod;
 }
 
+
 void DistributedProcessing()
 {
     int T,a,b,answer;
@@ -85,3 +86,37 @@ void DistributedProcessing()
         cout << answer << '\n';
     }
 }
+
+int Binary(int number)
+{
+    int count = 0;
+    while (number != 0)
+    {
+        if (number % 2 == 1) // 나머지가 1
+            ++count;
+
+        number /= 2;
+    }
+
+    return count;
+}
+
+
+int NextBigNumber(int n)
+{
+    // for문 한번까지는 시간 복잡도가 괜찮다
+    // 1씩 증가시켜가며 1의 갯수를 비교
+
+    int answer = 0;
+
+    int count = Binary(n);
+
+    for (int i = n + 1; i < 1000000; ++i)
+    {
+        if (Binary(i) == count)
+            return i;
+    }
+
+    return answer;
+}
+
