@@ -120,3 +120,20 @@ int NextBigNumber(int n)
     return answer;
 }
 
+int JumpAndTeleport(int n)
+{
+	int cnt = 0;
+
+	while (n > 0)
+	{
+		if (n % 2 == 0)
+			n /= 2;
+		else
+		{
+			--n;
+			++cnt;
+		}
+	}
+	return cnt;
+}
+
