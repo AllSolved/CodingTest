@@ -137,3 +137,27 @@ int JumpAndTeleport(int n)
 	return cnt;
 }
 
+int ZOAC4()
+{
+	int h, w, n, m;
+	cin >> h;
+	cin >> w;
+	cin >> n;
+	cin >> m;
+
+	int answer = 0;
+	for (int i = 0; i < w; ++i)
+	{
+		for (int j = 0; j < h; ++j)
+		{
+			++answer;
+			j += n;
+		}
+
+		i += m;
+	}
+
+	cout << answer;
+	return 0;
+}
+

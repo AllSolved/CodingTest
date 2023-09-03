@@ -18,3 +18,6 @@ int NextBigNumber(int n);
 
 // 23.8.30 프로그래머스 : 점프와 순간이동
 int JumpAndTeleport(int n);
+
+// 23.09.03 백준 ZOAC 4
+int ZOAC4();
