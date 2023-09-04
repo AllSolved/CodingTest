@@ -741,3 +741,118 @@ void CheckCluster(Pos pos)
 		}
 	}
 }
+
+char swanMap[1500][1500];
+bool swanVisit[1500][1500];
+int R, C = 0;
+int day = 0;
+vector<Pos> Lpos;
+
+queue<Pos> water;
+queue<Pos> nextWater;
+queue<Pos> area;
+queue<Pos> nextArea;
+
+
+
+bool TryMove()
+{
+	while (!area.empty())
+	{
+		Pos pos = area.front();
+		area.pop();
+		swanVisit[pos.y][pos.x] = true;
+
+		for (int i = 0; i < 4; ++i)
+		{
+			Pos nextPos = Pos(pos.x + dirX[i], pos.y + dirY[i]);
+
+			if (swanVisit[nextPos.y][nextPos.x])
+				continue;
+
+			// 방문할 수 없는 곳의 경우
+			if (nextPos.x < 0 || nextPos.y < 0 ||
+				nextPos.x >= C || nextPos.y >= R)
+				continue;
+
+			swanVisit[nextPos.y][nextPos.x] = true;
+			if (swanMap[nextPos.y][nextPos.x] == 'X')
+			{
+				nextArea.push(nextPos);
+			}
+
+			else if (swanMap[nextPos.y][nextPos.x] == '.')
+				area.push(nextPos);
+
+			if (swanMap[nextPos.y][nextPos.x] == 'L')
+				return true;
+		}
+	}
+	return false;
+}
+
+void AddDay()
+{
+	while (!water.empty())
+	{
+		Pos pos = water.front();
+		water.pop();
+
+		for (int i = 0; i < 4; ++i)
+		{
+			Pos nextPos = Pos(pos.x + dirX[i], pos.y + dirY[i]);
+
+			// 범위를 벗어날 경우
+			if (nextPos.x >= 0 && nextPos.y >= 0 &&
+				nextPos.x < C && nextPos.y < R)
+			{
+				if (swanMap[nextPos.y][nextPos.x] == 'X')
+				{
+					swanMap[nextPos.y][nextPos.x] = '.';
+					nextWater.push(nextPos);
+				}
+			}
+		}
+	}
+
+	++day;
+}
+
+void SwanLake()
+{
+	cin >> R >> C;
+	for (int i = 0; i < R; ++i)
+	{
+		for (int j = 0; j < C; ++j)
+		{
+			cin >> swanMap[i][j];
+			if (swanMap[i][j] == 'L')
+			{
+				Pos pos = Pos(j, i);
+				Lpos.push_back(pos);
+			}
+			if (swanMap[i][j] != 'X')
+			{
+				Pos pos = Pos(j, i);
+				water.push(pos);
+			}
+		}
+	}
+
+	area.push(Lpos[0]);
+
+	while (true)
+	{
+		if (TryMove())
+		{
+			break;
+		}
+		AddDay();
+		area = nextArea;
+		water = nextWater;
+		nextArea = queue<Pos>();
+		nextWater = queue<Pos>();
+	}
+
+	cout << day;
+}

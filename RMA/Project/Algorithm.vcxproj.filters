@@ -49,7 +49,7 @@
     <Filter Include="Algorithm\05. Sorting\06. Search\DataStructure\Vector">
       <UniqueIdentifier>{cd04a17d-7bb0-4e8a-9461-a0e35d9f0a78}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Algorithm\03. DFS\04. BFS">
+    <Filter Include="Algorithm\04. BFS">
       <UniqueIdentifier>{41bb5f93-ad5f-43e7-814d-58d1485b0c1f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -64,7 +64,7 @@
       <Filter>Algorithm\03. DFS</Filter>
     </ClCompile>
     <ClCompile Include="BFS.cpp">
-      <Filter>Algorithm\03. DFS\04. BFS</Filter>
+      <Filter>Algorithm\04. BFS</Filter>
     </ClCompile>
     <ClCompile Include="Sorting.cpp">
       <Filter>Algorithm\05. Sorting</Filter>
@@ -103,7 +103,7 @@
       <Filter>Algorithm\03. DFS</Filter>
     </ClInclude>
     <ClInclude Include="BFS.h">
-      <Filter>Algorithm\03. DFS\04. BFS</Filter>
+      <Filter>Algorithm\04. BFS</Filter>
     </ClInclude>
     <ClInclude Include="Sorting.h">
       <Filter>Algorithm\05. Sorting</Filter>

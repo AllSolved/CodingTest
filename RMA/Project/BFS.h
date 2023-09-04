@@ -41,3 +41,8 @@ void Laboratory();
 // 23.1.26 백준 2993번 : 미네랄
 void Mineral();
 void CheckCluster(Pos pos);
+
+// 23.9.4 백준 3197번 : 백조의 호수
+bool TryMove();
+void AddDay();
+void SwanLake();
