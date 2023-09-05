@@ -21,3 +21,7 @@ void Message();
 
 //23. 1.13 프로그래머스 : 최고의 집합
 vector<int> BestSet(int n ,int s);
+
+//23. 9.5 프로그래머스 : 예상 대진표
+int Fight(int i);
+int MatchList(int n, int a, int b);

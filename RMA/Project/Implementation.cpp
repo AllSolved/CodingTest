@@ -499,3 +499,24 @@ vector<int> BestSet(int n, int s)
 
 	return answer;
 }
+
+int Fight(int i)
+{
+	if (i % 2 == 0)
+		return i / 2;
+	else
+		return (i / 2) + 1;
+}
+
+int MatchList(int n, int a, int b)
+{
+	int answer = 0;
+
+	while (a != b)
+	{
+		a = Fight(a);
+		b = Fight(b);
+		++answer;
+	}
+	return answer;
+}
