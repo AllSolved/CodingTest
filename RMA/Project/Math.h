@@ -21,3 +21,6 @@ int JumpAndTeleport(int n);
 
 // 23.09.03 백준 ZOAC 4
 int ZOAC4();
+
+// 24.5.7 백준 1546번 : 평균 구하기
+void SumAverage();

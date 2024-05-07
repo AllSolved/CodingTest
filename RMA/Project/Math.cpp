@@ -161,3 +161,26 @@ int ZOAC4()
 	return 0;
 }
 
+void SumAverage()
+{
+    int N, M = 0;
+    cin >> N;
+
+    priority_queue<int> pq;
+    int score;
+    for (int i = 0; i < N; ++i)
+    {
+        cin >> score;
+        pq.push(score);
+    }
+
+    M = pq.top();
+    double result = 0;
+    while (!pq.empty())
+    {
+        result += pq.top();
+        pq.pop();
+    }
+    cout << result * 100 / M / N;
+}
+
