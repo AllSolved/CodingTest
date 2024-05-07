@@ -286,3 +286,31 @@ int NumberGame(vector<int> A, vector<int> B)
 	return answer;
 }
 
+void SortNumber()
+{
+	int N = 0;
+	cin >> N;
+
+	priority_queue<int, vector<int>, greater<int>> pq;
+
+	int n;
+	for (int i = 0; i < N; ++i)
+	{
+		cin >> n;
+		pq.push(n);
+	}
+
+	int prev = 0;
+	while (!pq.empty())
+	{
+		int cur = pq.top();
+		if (prev != cur)
+		{
+			cout << pq.top() << endl;
+			prev = cur;
+		}
+
+		pq.pop();
+	}
+}
+

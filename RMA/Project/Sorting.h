@@ -21,3 +21,6 @@ long long WorkOverTime(int n, vector<int> works);
 
 // 22.2.1 프로그래머스 숫자 게임
 int NumberGame(vector<int> A, vector<int> B);
+
+// 24.5.7 백준 2750번 : 수 정렬하기
+void SortNumber();
