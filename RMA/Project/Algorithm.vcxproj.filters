@@ -88,11 +88,11 @@
     <ClCompile Include="MyVector.cpp">
       <Filter>Algorithm\05. Sorting\06. Search\DataStructure\Vector</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Algorithm\05. Sorting\06. Search\DataStructure</Filter>
-    </ClCompile>
     <ClCompile Include="StringCase.cpp">
       <Filter>Algorithm\12. String</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
