@@ -184,3 +184,54 @@ void SumAverage()
     cout << result * 100 / M / N;
 }
 
+int sum[1001][1001] = { 0 };
+void SumRange5()
+{
+    //int arr[1001][1001] = { 0 };
+ 
+    int N, M = {0};
+    cin >> N >> M;
+
+
+    for (int y = 1; y <= N; y++)
+    {
+        for (int x = 1; x <= N; x++)
+        {
+            // 수 입력 받기
+            int num = 0;
+            cin >> num;
+            sum[y][x] = sum[y][x - 1] + sum[y - 1][x] - sum[y - 1][x - 1] + num;
+        }
+    }
+
+    cout << "\n";
+    cout << "구간합";
+    cout << "\n";
+
+    for (int y = 1; y <= N; y++)
+    {
+        for (int x = 1; x <= N; x++)
+        {
+            // 수 입력 받기
+            cout << sum[y][x] << " ";
+        }
+
+        cout << "\n";
+    }
+
+    cout << "\n";
+    cout << "정답";
+    cout << "\n";
+
+    // 답 도출
+    for (int i = 0; i < M; ++i)
+    {
+        int x1, y1, x2, y2;
+        cin >> y1 >> x1 >> y2 >> x2;
+
+        int answer = sum[y2][x2] - sum[y2-1][x1] - sum[y1][x2-1] + sum[y1 - 1][x1 - 1];
+        cout << answer << "\n";
+    }
+
+}
+
