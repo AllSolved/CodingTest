@@ -231,3 +231,47 @@ void SumRange5()
     }
 
 }
+
+void SumRemainder()
+{
+    int N, M = 0;
+    cin >> N >> M;
+
+    vector<long> sum(N, 0);
+    vector<long> ArrRemainder(M, 0);
+
+    cin >> sum[0];
+
+    long result = 0;
+    for (int i = 1; i < N; ++i)
+    {
+        cin >> sum[i];
+
+        // 구간 합 구하기
+        sum[i] = sum[i - 1] + sum[i];
+
+    }
+
+    for (int i = 0; i < N; ++i)
+    {
+        // 나머지 계산
+        int remainder = sum[i] % M;
+        if (remainder == 0)
+        {
+            ++result;
+        }
+
+        ArrRemainder[remainder] += 1;
+    }
+
+    long count = 0;
+    for (int i = 0; i < M; ++i)
+    {
+        // 나머지로 구간을 만들 수 있는 경우
+        if (ArrRemainder[i] > 1)
+        {
+            count += (ArrRemainder[i] * (ArrRemainder[i] - 1)) / 2;
+        }
+    }
+    cout << result + count;
+}
