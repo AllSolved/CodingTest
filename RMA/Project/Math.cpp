@@ -184,23 +184,21 @@ void SumAverage()
     cout << result * 100 / M / N;
 }
 
-int sum[1001][1001] = { 0 };
+int sum[1025][1025] = { 0 };
 void SumRange5()
 {
-    //int arr[1001][1001] = { 0 };
- 
-    int N, M = {0};
+    int N, M = { 0 };
     cin >> N >> M;
 
 
-    for (int y = 1; y <= N; y++)
+    for (int x = 1; x <= N; x++)
     {
-        for (int x = 1; x <= N; x++)
+        for (int y = 1; y <= N; y++)
         {
             // 수 입력 받기
             int num = 0;
             cin >> num;
-            sum[y][x] = sum[y][x - 1] + sum[y - 1][x] - sum[y - 1][x - 1] + num;
+            sum[x][y] = sum[x][y - 1] + sum[x - 1][y] - sum[x - 1][y - 1] + num;
         }
     }
 
@@ -208,12 +206,11 @@ void SumRange5()
     cout << "구간합";
     cout << "\n";
 
-    for (int y = 1; y <= N; y++)
+    for (int x = 1; x <= N; x++)
     {
-        for (int x = 1; x <= N; x++)
+        for (int y = 1; y <= N; y++)
         {
-            // 수 입력 받기
-            cout << sum[y][x] << " ";
+            cout << sum[x][y] << " ";
         }
 
         cout << "\n";
@@ -227,11 +224,10 @@ void SumRange5()
     for (int i = 0; i < M; ++i)
     {
         int x1, y1, x2, y2;
-        cin >> y1 >> x1 >> y2 >> x2;
+        cin >> x1 >> y1 >> x2 >> y2;
 
-        int answer = sum[y2][x2] - sum[y2-1][x1] - sum[y1][x2-1] + sum[y1 - 1][x1 - 1];
+        int answer = sum[x2][y2] - sum[x1 - 1][y2] - sum[x2][y1 - 1] + sum[x1 - 1][y1 - 1];
         cout << answer << "\n";
     }
 
 }
-
