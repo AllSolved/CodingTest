@@ -12,3 +12,5 @@ vector<string> CardGame(vector<string> card, vector<string> word);
 int Fibo(int n);
 
 
+// 24.5.27 [투포인터]백준 2018번 : 수들의합5
+void SumNumber5();

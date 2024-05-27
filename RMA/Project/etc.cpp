@@ -119,3 +119,40 @@ int Fibo(int n)
 
     return v[n];
 }
+
+void SumNumber5()
+{
+    int N;
+    cin >> N;
+
+    int sum = 1;
+    int count = 1;
+
+    int start = 1;
+    int end = 1;
+
+    while (end != N)
+    {
+        if (sum > N)
+        {
+            sum -= start;
+            ++start;
+        }
+
+        else if (sum < N)
+        {
+            ++end;
+            sum += end;
+        }
+
+        else
+        {
+            ++end;
+            sum += end;
+            ++count;
+        }
+
+    }
+
+    cout << count;
+}
