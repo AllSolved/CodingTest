@@ -156,3 +156,46 @@ void SumNumber5()
 
     cout << count;
 }
+
+void Jumong()
+{
+    int N, M;
+    cin >> N >> M;
+    vector<int> v(N, 0);
+
+
+    for (int i = 0; i < N; ++i)
+    {
+        scanf("%d", &v[i]);
+    }
+
+    sort(v.begin(), v.end());
+
+    int start = 0;
+    int end = N - 1;
+    int result = 0;
+
+    while (start < end)
+    {
+        int sum = v[start] + v[end];
+        if (sum > M)
+        {
+            --end;
+        }
+
+        else if (sum == M)
+        {
+            ++result;
+            ++start;
+            --end;
+        }
+
+        else
+        {
+            ++start;
+        }
+    }
+
+    printf("%d", result);
+
+}
