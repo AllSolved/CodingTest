@@ -199,3 +199,54 @@ void Jumong()
     printf("%d", result);
 
 }
+
+void GoodNumber()
+{
+    int N;
+    cin >> N;
+
+    vector<int> v(N, 0);
+
+    for (int i = 0; i < N; ++i)
+    {
+        cin >> v[i];
+    }
+
+    sort(v.begin(), v.end());
+    int answer = 0;
+
+    for (int i = 0; i < N; i++)
+    {
+        long target = v[i];
+        int start = 0;
+        int end = N - 1;
+        while (start < end)
+        {
+            long sum = v[start] + v[end];
+
+            if (sum == target)
+            {
+                if (start != i && end != i)
+                {
+                    ++answer;
+                    break;
+                }
+
+                else if (start == i) { ++start; }
+                else if (end == i) { --end; }
+            }
+
+            else if (sum < target)
+            {
+                ++start;
+            }
+            else
+            {
+                --end;
+            }
+        }
+    }
+
+    cout << answer;
+    return 0;
+}
