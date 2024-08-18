@@ -20,3 +20,5 @@ void Jumong();
 
 // 24.6.4	[투포인터] 백준 1253번 : 좋다
 void GoodNumber();
+
+void FindMinValue();

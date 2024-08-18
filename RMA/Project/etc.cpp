@@ -248,5 +248,35 @@ void GoodNumber()
     }
 
     cout << answer;
-    return 0;
+}
+
+void FindMinValue()
+{
+    int N, L;
+    scanf("%d","%d", &N, &L);
+
+    deque<pair<int, int>> dq;
+    for (int i = 0; i < N; ++i)
+    {
+        int value = 0;
+        scanf("%d", &value);
+        pair<int, int> node = make_pair(i, value);
+
+        // 가장 끝에 있는 값이 들어온 value보다 클 경우
+        while (!dq.empty() && dq.back().second > value)
+        {
+            dq.pop_back();
+        }
+
+        dq.push_back(node);
+
+        // index가 범위를 벗어날 경우
+        if (dq.front().first <= i - L)
+        {
+            dq.pop_front();
+        }
+
+        printf("%d", dq.front().second, " ");
+    }
+
 }
