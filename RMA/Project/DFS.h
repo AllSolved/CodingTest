@@ -8,3 +8,6 @@ void DFS();
 bool CheckIceBox(int _x, int _y, int _n, int _m, int _Graph[][1000]);		// DFS
 void FreezingDrinks();
 
+
+void NQueen_CheckQueen(int posX);
+void NQueen();

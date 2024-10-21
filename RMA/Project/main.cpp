@@ -9,14 +9,32 @@
 #include "Math.h"
 #include "DataStructure.h"
 #include "DP.h"
-#include "etc.h"
+//#include "etc.h"
 #include "CodingTest.h"
-
 
 
 int main()
 {
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	int n = 6;
+	switch (n)
+	{
+	case 100:
+	case 1:
+	case 2:
+		std::cout << "2222" << std::endl;
+		break;
+	default:
+	{
+		std::cout << "6666" << std::endl;
+	case 5:
+		std::cout << "1234" << std::endl;
 
-	SumRange5();
+	case 6:
+		std::cout << "4444" << std::endl;
+		break;
+	}
+
+	}
+
+	return 0;
 }

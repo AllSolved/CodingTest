@@ -166,7 +166,7 @@ void Jumong()
 
     for (int i = 0; i < N; ++i)
     {
-        scanf("%d", &v[i]);
+        scanf_s("%d", &v[i]);
     }
 
     sort(v.begin(), v.end());
@@ -253,13 +253,13 @@ void GoodNumber()
 void FindMinValue()
 {
     int N, L;
-    scanf("%d","%d", &N, &L);
+    scanf_s("%d","%d", &N, &L);
 
     deque<pair<int, int>> dq;
     for (int i = 0; i < N; ++i)
     {
         int value = 0;
-        scanf("%d", &value);
+        scanf_s("%d", &value);
         pair<int, int> node = make_pair(i, value);
 
         // 가장 끝에 있는 값이 들어온 value보다 클 경우

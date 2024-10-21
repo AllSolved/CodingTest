@@ -181,3 +181,49 @@ void FreezingDrinks()
 	std::cout << result << '\n'; // 정답 출력 
 }
 
+
+int board[16] = { 0 };
+int answer = 0;
+int N = 0;
+
+void NQueen_CheckQueen(int posX)
+{
+	if (N == posX)
+	{
+		answer++;
+	}
+
+	else
+	{
+		for (int i = 0; i < N; i++)
+		{
+			// i부터 queen을 놓는 경우의 수를 체크
+			board[posX] = i;
+			bool canPlace = true;
+
+			for (int j = 0; j < posX; j++)
+			{
+				// 현재 행에 이미 퀸을 놓은 경우
+				// 대각선의 진행 방향에 퀸이 있는 경우 
+				if (board[posX] == board[j] || (posX - j == i - board[j]) || (posX - j == board[j] - i))
+				{
+					canPlace = false;
+					break;
+				}
+			}
+
+			if (canPlace)
+			{
+				NQueen_CheckQueen(posX + 1);
+			}
+		}
+	}
+}
+
+void NQueen()
+{
+	std::cin >> N;
+	NQueen_CheckQueen(0);
+	std::cout << answer;
+}
+
