@@ -24,12 +24,12 @@ void UpDownLeftRight()
 		}
 	};
 
-	
-	Pos currentPos = {1, 1};
+
+	Pos currentPos = { 1, 1 };
 	int N;
 	char Dir;
 	std::cin >> N;
-	
+
 	// 입력을 받는 동안
 	while (std::cin >> Dir)
 	{
@@ -79,7 +79,7 @@ void UpDownLeftRight()
 	}
 
 	std::cout << currentPos.x << " " << currentPos.y;
-	
+
 }
 
 void Time()
@@ -104,13 +104,13 @@ void Time()
 			}
 		}
 	}
-	
+
 	std::cout << Count;
 }
 
 void RoyalNight()
 {
-	enum Pos {X, Y};
+	enum Pos { X, Y };
 
 	int CurrentPos[2] = { 0, 0 };
 	int Count = 0;
@@ -128,7 +128,7 @@ void RoyalNight()
 
 		CurrentPos[i] = KnightPos[i];
 	}
-	
+
 	// 8가지 선택지 체크
 	for (int i = 0; i < 8; ++i)
 	{
@@ -180,7 +180,7 @@ void RoyalNight()
 		}
 
 		// 벽을 넘었다면 Count를 세지 않음
-		if (NextPos[X] <'a' || NextPos[X] > 'h'||
+		if (NextPos[X] < 'a' || NextPos[X] > 'h' ||
 			NextPos[Y] < '1' || NextPos[Y] > '8')
 		{
 			continue;
@@ -191,19 +191,19 @@ void RoyalNight()
 			++Count;
 		}
 	}
-	
+
 	std::cout << Count;
 
 }
 
 void GameDevelopment()
 {
-	enum Direction {NORTH, EAST, SOUTH, WEST};
+	enum Direction { NORTH, EAST, SOUTH, WEST };
 	enum Pos { X, Y, Dir };
 
 	int N = 0;		// 세로
 	int M = 0;		// 가로
-	
+
 
 	// 맵의 크기 입력
 	std::cin >> N >> M;
@@ -258,7 +258,7 @@ void GameDevelopment()
 		// 2단계 수행 (방향에 따른 인덱스 확인)
 		switch (player[Dir])
 		{
-			
+
 		case NORTH:
 			playerNextPos[Y] -= 1;
 			playerNextPos[Dir] = NORTH;
@@ -406,7 +406,7 @@ void Message()
 	{
 		char Text = 'A' + i;
 
-		if (count <=3)
+		if (count <= 3)
 		{
 			// 다음이 4번째 문자일 경우
 			if (Text == 'R' || Text == 'Y')
@@ -467,7 +467,7 @@ void Message()
 			}
 		}
 
-		++i; 
+		++i;
 
 	}
 
@@ -519,4 +519,91 @@ int MatchList(int n, int a, int b)
 		++answer;
 	}
 	return answer;
+}
+
+
+int N, M, K, R, C, answer;
+int board[41][41] = { 0 };
+void AttachSticker()
+{
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	cin >> N >> M >> K;
+
+	for (int i = 0; i < K; ++i)
+	{
+		cin >> R >> C;
+
+		vector<Pos> sticker;
+		for (int x = 0; x < R; ++x)
+		{
+			for (int y = 0; y < C; ++y)
+			{
+				int data;
+				cin >> data;
+				if (data == 1)
+				{
+					sticker.push_back(Pos(x, y));
+				}
+			}
+		}
+
+		PlacedSticker(sticker);
+	}
+
+	cout << answer << "\n";
+}
+
+bool TryAttachSticker(Pos startPos, vector<Pos>& stickers)
+{
+	for (int i = 0; i < stickers.size(); ++i)
+	{
+		Pos nextPos = stickers[i] + startPos;
+		if (nextPos.x < 0 || nextPos.y < 0 || nextPos.x >= N || nextPos.y >= M
+			|| board[nextPos.x][nextPos.y] == 1)
+		{
+			return false;
+		}
+	}
+
+	for (int i = 0; i < stickers.size(); ++i)
+	{
+		Pos nextPos = stickers[i] + startPos;
+		board[nextPos.x][nextPos.y] = 1;
+		++answer;
+	}
+
+	return true;
+}
+
+void RotateSticker(vector<Pos>& stickers)
+{
+	for (auto& pos : stickers)
+	{
+		pos.Rotate(R);
+	}
+
+	swap(R, C);
+}
+
+bool PlacedSticker(vector<Pos>& sticker)
+{
+	for (int k = 0; k < 4; ++k)
+	{
+		// 이부분 다시 생각하기
+		for (int i = 0; i <= N - R; ++i)
+		{
+			for (int j = 0; j <= M - C; ++j)
+			{
+				if (TryAttachSticker(Pos(i, j), sticker))
+				{
+					return true;
+				}
+			}
+		}
+		RotateSticker(sticker);
+	}
+	return false;
 }
