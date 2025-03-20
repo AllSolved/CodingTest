@@ -523,84 +523,6 @@ int MatchList(int n, int a, int b)
 }
 
 
-
-
-vector<Pos> vHouse;
-vector<Pos> vChicken;
-vector<vector<int>> vAllDistance;   // 각각의 치킨집까지의 거리
-vector<int> vCombi;                 // 치킨집의 조합
-int answer = INT_MAX;
-int N, M;
-void SelectedChicken()
-{
-	vCombi.resize(vChicken.size(), 1);
-
-	// 폐업할 치킨집과 살아남을 치킨집을 0,1로 구분
-	fill(vCombi.begin(), vCombi.begin() + (vChicken.size() - M), 0);
-
-
-	// 조합 탐색
-	do
-	{
-		// 선택된 치킨집 인덱스 저장
-		vector<int> selected;
-		for (int i = 0; i < vChicken.size(); ++i)
-		{
-			if (vCombi[i] == 1) selected.push_back(i);
-		}
-
-		// 선택된 치킨집으로 도시의 치킨 거리 계산
-		int totalDistance = 0;
-		for (int i = 0; i < vHouse.size(); ++i)
-		{
-			int minDist = INT_MAX;
-			for (int idx : selected)
-			{
-				minDist = min(minDist, vAllDistance[i][idx]);
-			}
-			totalDistance += minDist;
-		}
-
-		// 최소 도시 치킨 거리 갱신
-		answer = min(answer, totalDistance);
-
-	}
-	while (next_permutation(vCombi.begin(), vCombi.end()));
-}
-
-void DeliverChicken()
-{
-
-	cin >> N >> M;
-
-	// 집과 치킨집의 좌표를 저장
-	for (int i = 0; i < N; ++i)
-	{
-		for (int j = 0; j < N; ++j)
-		{
-			int data = 0;
-			cin >> data;
-			if (data == 1) { vHouse.emplace_back(i, j); }
-			else if (data == 2) { vChicken.emplace_back(i, j); }
-		}
-	}
-
-	// 각각 집에서 치킨집까지의 거리를 전부 계산
-	vAllDistance.resize(vHouse.size(), vector<int>(vChicken.size()));
-	for (int i = 0; i < vHouse.size(); ++i)
-	{
-		for (int j = 0; j < vChicken.size(); ++j)
-		{
-			vAllDistance[i][j] = vHouse[i].Distance(vChicken[j]);
-		}
-	}
-
-	SelectedChicken();
-
-	cout << answer << '\n';
-}
-
-
 int N, M, K, R, C, answer;
 int board[41][41] = { 0 };
 void AttachSticker()
@@ -685,4 +607,112 @@ bool PlacedSticker(vector<Pos>& sticker)
 		RotateSticker(sticker);
 	}
 	return false;
+}
+
+vector<Pos> vHouse;
+vector<Pos> vChicken;
+vector<vector<int>> vAllDistance;   // 각각의 치킨집까지의 거리
+vector<int> vCombi;                 // 치킨집의 조합
+int answer = INT_MAX;
+int N, M;
+void SelectedChicken()
+{
+	vCombi.resize(vChicken.size(), 1);
+
+	// 폐업할 치킨집과 살아남을 치킨집을 0,1로 구분
+	fill(vCombi.begin(), vCombi.begin() + (vChicken.size() - M), 0);
+
+
+	// 조합 탐색
+	do
+	{
+		// 선택된 치킨집 인덱스 저장
+		vector<int> selected;
+		for (int i = 0; i < vChicken.size(); ++i)
+		{
+			if (vCombi[i] == 1) selected.push_back(i);
+		}
+
+		// 선택된 치킨집으로 도시의 치킨 거리 계산
+		int totalDistance = 0;
+		for (int i = 0; i < vHouse.size(); ++i)
+		{
+			int minDist = INT_MAX;
+			for (int idx : selected)
+			{
+				minDist = min(minDist, vAllDistance[i][idx]);
+			}
+			totalDistance += minDist;
+		}
+
+		// 최소 도시 치킨 거리 갱신
+		answer = min(answer, totalDistance);
+
+	}
+	while (next_permutation(vCombi.begin(), vCombi.end()));
+}
+
+void DeliverChicken()
+{
+
+	cin >> N >> M;
+
+	// 집과 치킨집의 좌표를 저장
+	for (int i = 0; i < N; ++i)
+	{
+		for (int j = 0; j < N; ++j)
+		{
+			int data = 0;
+			cin >> data;
+			if (data == 1) { vHouse.emplace_back(i, j); }
+			else if (data == 2) { vChicken.emplace_back(i, j); }
+		}
+	}
+
+	// 각각 집에서 치킨집까지의 거리를 전부 계산
+	vAllDistance.resize(vHouse.size(), vector<int>(vChicken.size()));
+	for (int i = 0; i < vHouse.size(); ++i)
+	{
+		for (int j = 0; j < vChicken.size(); ++j)
+		{
+			vAllDistance[i][j] = vHouse[i].Distance(vChicken[j]);
+		}
+	}
+
+	SelectedChicken();
+
+	cout << answer << '\n';
+}
+
+void GroupWordChecker()
+{
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int N, answer;
+	cin >> N;
+
+	answer = 0;
+	for (int i = 0; i < N; ++i)
+	{
+		string str;
+		cin >> str;
+
+		bool isGroup = true;
+		string checked = "";
+		for (int j = 0; j < str.length(); ++j)
+		{
+			if (str[j] == checked.back()) { continue; }
+			if (checked.find(str[j]) != string::npos)
+			{
+				isGroup = false;
+				break;
+			}
+			checked += str[j];
+		}
+		answer = isGroup ? answer + 1 : answer;
+	}
+
+	cout << answer << '\n';
 }

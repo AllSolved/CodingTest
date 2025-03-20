@@ -58,3 +58,7 @@ struct Pos
 		return result;
 	}
 };
+
+//25.03.20 백준 1316번 그룹단어체커
+void GroupWordChecker();
+
